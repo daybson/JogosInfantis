@@ -1,0 +1,256 @@
+fileFormatVersion: 2
+guid: 227593495ca82d244ba0178fa1a1ca29
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Rectangle 1 copy 5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 115
+      width: 29
+      height: 310
+    spriteID: 4da0a63f4d3f91143a967e31a87bcb6c
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -1006, y: -1}
+  - name: Rectangle 1 copy 4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 433
+      width: 29
+      height: 310
+    spriteID: 8b2c0469df3c6b547afccb4c569a2a73
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -182, y: 56}
+  - name: Rectangle 1 copy 2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 78
+      width: 518
+      height: 29
+    spriteID: 29145e4a0f2dcd84694e7c324bd72aca
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -182, y: -285}
+  - name: Rectangle 1 copy
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 853
+      height: 29
+    spriteID: eb571f2d7e0fde7418b3d76616756656
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -182, y: -85}
+  - name: Rectangle 1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 41
+      width: 853
+      height: 29
+    spriteID: 4824b737d5533bb46a297847d73ccf87
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -182, y: -629}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 1024
+  importedTextureHeight: 1024
+  documentSize: {x: 1200, y: 800}
+  textureActualWidth: 1024
+  textureActualHeight: 1024
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Rectangle 1 copy 5
+    spriteName: Rectangle 1 copy 5
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4da0a63f4d3f91143a967e31a87bcb6c
+    layerID: 8
+    mosaicPosition: {x: 4, y: 115}
+  - name: Rectangle 1 copy 4
+    spriteName: Rectangle 1 copy 4
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 8b2c0469df3c6b547afccb4c569a2a73
+    layerID: 7
+    mosaicPosition: {x: 4, y: 433}
+  - name: Rectangle 1 copy 2
+    spriteName: Rectangle 1 copy 2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 29145e4a0f2dcd84694e7c324bd72aca
+    layerID: 5
+    mosaicPosition: {x: 4, y: 78}
+  - name: Rectangle 1 copy
+    spriteName: Rectangle 1 copy
+    isGroup: 0
+    parentIndex: -1
+    spriteID: eb571f2d7e0fde7418b3d76616756656
+    layerID: 4
+    mosaicPosition: {x: 4, y: 4}
+  - name: Rectangle 1
+    spriteName: Rectangle 1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4824b737d5533bb46a297847d73ccf87
+    layerID: 3
+    mosaicPosition: {x: 4, y: 41}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+  boneGOs: []
+  generateGOHierarchy: 0
+  textureAssetName: Lab01
+  prefabAssetName: Lab01_GO
