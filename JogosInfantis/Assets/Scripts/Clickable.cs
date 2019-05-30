@@ -12,7 +12,7 @@ public class Clickable : MonoBehaviour
 
     private void Awake()
     {
-        click = FindObjectOfType<MatchItem>().Check;
+        click = FindObjectOfType<Matcher>().Check;
     }
 
     private void Update()

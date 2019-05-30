@@ -10,12 +10,14 @@ public class BallFollower : MonoBehaviour
     private TargetJoint2D target2D;
     private new Rigidbody2D rigidbody2D;
 
+
     private void Awake()
     {
         this.target2D = GetComponent<TargetJoint2D>();
         this.rigidbody2D = GetComponent<Rigidbody2D>();
         this.rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
+
 
     private void LateUpdate()
     {

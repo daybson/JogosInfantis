@@ -9,51 +9,41 @@ public class Spawner : MonoBehaviour
     public float maxX;
     public float topY;
     public float offsetY;
-
-    public string Sequence;
-    private string[] words;
     public float interval;
-    public char separator;
-
     public GameObject obj;
-    public int index;
-
+    private Matcher matcher;
     private WaitForSeconds waitFor;
+
 
     private void Awake()
     {
-        var width = obj.GetComponentInChildren<SpriteRenderer>().size.x / 2;
-        minX = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).x + width;
-        maxX = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0)).x - width;
-        topY = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + offsetY;
+        var width = this.obj.GetComponentInChildren<SpriteRenderer>().size.x / 2;
+        this.minX = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).x + width;
+        this.maxX = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0)).x - width;
+        this.topY = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + this.offsetY;
     }
+
 
     private void Start()
     {
-        waitFor = new WaitForSeconds(interval);
-
-        words = Sequence.Split(separator);
-        index = 0;
-
+        this.waitFor = new WaitForSeconds(this.interval);
         StartCoroutine(DoSpawn());
     }
 
-    public IEnumerator DoSpawn()
+
+    private IEnumerator DoSpawn()
     {
-        while (index < words.Length)
-        {
-            Spawn(obj, words[index++]);
-            yield return waitFor;
-        }
+        Spawn(this.obj, this.matcher.GetNextWord());
+        yield return this.waitFor;
     }
+
 
     private void Spawn(GameObject what, string text)
     {
         var o = Instantiate(what);
-        var x = Random.Range(minX, maxX);
+        var x = Random.Range(this.minX, this.maxX);
 
-        o.transform.position = new Vector3(x, topY, 0);
-        //o.GetComponent<WaveX>().initialX = x;
+        o.transform.position = new Vector3(x, this.topY, 0);
         o.GetComponentInChildren<TextMeshPro>().text = text;
     }
 }
