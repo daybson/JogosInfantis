@@ -26,16 +26,21 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             {
                 var objs = FindObjectsOfType<T>();
 
-                instance = objs[0];
-
-                if (objs.Length > 1)
+                try
                 {
-                    for (var i = objs.Length; i > 1; i--)
-                        Destroy(objs[i].gameObject);
-                }
+                    instance = objs[0];
 
-                if (instance == null)
-                    Debug.LogError("There's no singleton instantiated!");
+                    if (objs.Length > 1)
+                    {
+                        for (var i = objs.Length; i > 1; i--)
+                            Destroy(objs[i].gameObject);
+                    }
+                }
+                catch 
+                {
+                    if (instance == null)
+                        Debug.LogError($"There's no singleton of {typeof(T)} instantiated!");
+                }
             }
 
             return instance;

@@ -7,12 +7,12 @@ public delegate bool CheckItem(string item);
 
 public class Matcher : MonoBehaviour
 {
-    public List<string> validWord;
+    public List<string> validWords;
 
     public string Sequence;
     private string[] words;
     public char separator;
-    public int index;
+    private int index;
 
 
     private void Awake()
@@ -38,6 +38,6 @@ public class Matcher : MonoBehaviour
 
     public bool Check(string item)
     {
-        return validWord.Contains(item);
+        return validWords.Contains(item);
     }
 }

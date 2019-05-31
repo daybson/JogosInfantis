@@ -5,22 +5,28 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public float minX;
-    public float maxX;
-    public float topY;
-    public float offsetY;
+    public static Vector2 ScreenBoundsMin;
+    public static Vector2 ScreenBoundsMax;
+
+    public float safeMarginX;
+    public float safeMarginY;
+
     public float interval;
     public GameObject obj;
-    private Matcher matcher;
+    public Matcher matcher;
+
     private WaitForSeconds waitFor;
 
+    public float levelDuration = 0;
+    private float currentTime = 0;
 
     private void Awake()
     {
-        var width = this.obj.GetComponentInChildren<SpriteRenderer>().size.x / 2;
-        this.minX = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).x + width;
-        this.maxX = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0)).x - width;
-        this.topY = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + this.offsetY;
+        ScreenBoundsMin = GameSystem.Instance.MainCamera.ViewportToWorldPoint(Vector3.zero);
+        ScreenBoundsMax = GameSystem.Instance.MainCamera.ViewportToWorldPoint(Vector3.one);
+
+        ScreenBoundsMin += new Vector2(safeMarginX, safeMarginY);
+        ScreenBoundsMax += new Vector2(-safeMarginX, -safeMarginY);
     }
 
 
@@ -31,19 +37,26 @@ public class Spawner : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        this.currentTime += Time.deltaTime;
+    }
+
     private IEnumerator DoSpawn()
     {
-        Spawn(this.obj, this.matcher.GetNextWord());
-        yield return this.waitFor;
+        while (this.currentTime <= this.levelDuration)
+        {
+            Spawn(this.obj, this.matcher.GetNextWord());
+            yield return this.waitFor;
+        }
     }
 
 
     private void Spawn(GameObject what, string text)
     {
+        
         var o = Instantiate(what);
-        var x = Random.Range(this.minX, this.maxX);
-
-        o.transform.position = new Vector3(x, this.topY, 0);
+        //o.transform.position = new Vector3(0, this.topY, 0);
         o.GetComponentInChildren<TextMeshPro>().text = text;
     }
 }
