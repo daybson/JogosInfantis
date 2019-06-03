@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -57,6 +57,6 @@ public class Spawner : MonoBehaviour
         
         var o = Instantiate(what);
         //o.transform.position = new Vector3(0, this.topY, 0);
-        o.GetComponentInChildren<TextMeshPro>().text = text;
+        o.GetComponentInChildren<Text>().text = text;
     }
 }

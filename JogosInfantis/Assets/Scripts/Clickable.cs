@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Clickable : MonoBehaviour
 {
-    //public TextMeshPro text;
+    public Text text;
     public SpriteRenderer sprite;
     public event CheckItem click;
     public float fadeSpeed;
     private bool isFade;
 
+    public Color[] colors;
+
     private void Awake()
     {
         click = FindObjectOfType<Matcher>().Check;
+        sprite.color = colors[Random.Range(0, colors.Length - 1)];
     }
 
     private void Update()
@@ -23,12 +27,12 @@ public class Clickable : MonoBehaviour
 
     private void OnMouseDown()
     {
-        isFade = true;
+        isFade = click.Invoke(text.text);
 
-        //if (click.Invoke(text.text))
-        //    sprite.color = Color.green;
-        //else
-        //    sprite.color = Color.red;
+        if (isFade)
+            sprite.color = Color.green;
+        else
+            sprite.color = Color.red;
     }
 
 
@@ -44,11 +48,11 @@ public class Clickable : MonoBehaviour
             this.sprite.color.b,
             a);
 
-        //this.text.color = new Color(
-        //    this.text.color.r,
-        //    this.text.color.g,
-        //    this.text.color.b,
-        //    a);
+        this.text.color = new Color(
+            this.text.color.r,
+            this.text.color.g,
+            this.text.color.b,
+            a);
 
         if (a == 0)
             gameObject.transform.root.gameObject.SetActive(false);

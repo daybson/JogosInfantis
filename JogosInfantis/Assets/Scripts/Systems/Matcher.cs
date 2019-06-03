@@ -18,7 +18,7 @@ public class Matcher : MonoBehaviour
     private void Awake()
     {
         this.words = this.Sequence.Split(this.separator);
-        this.index = 0;
+        this.index = -1;
     }
 
     /// <summary>
@@ -27,10 +27,10 @@ public class Matcher : MonoBehaviour
     /// <returns>Palavra contida na lista</returns>
     public string GetNextWord()
     {
-        if (this.index < this.words.Length)
-            this.index++;
-        else
-            this.index = UnityEngine.Random.Range(0, this.words.Length);
+        //if (this.index < this.words.Length-1)
+        //    this.index++;
+        //else
+        this.index = UnityEngine.Random.Range(0, this.words.Length - 1);
 
         return this.words[this.index];
     }
