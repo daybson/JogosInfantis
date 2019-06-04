@@ -28,22 +28,22 @@ public class BallFollower : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private void LateUpdate()
     {
 #if UNITY_EDITOR
-        if (Input.GetMouseButton(0) && hover)
+        if (Input.GetMouseButton(0) )
         {
             var pw = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            //if ((pw - transform.position).sqrMagnitude < 102)
+            if ((pw - transform.position).sqrMagnitude < 103)
             this.target2D.target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 #endif
 
 #if UNITY_ANDROID        
-        if (Input.touchCount > 0 && hover)
+        if (Input.touchCount > 0)
         {
             var t = Input.GetTouch(0);
             var pw = Camera.main.ScreenToWorldPoint(new Vector3(t.position.x, t.position.y, 0));
 
-            //if ((pw - transform.position).sqrMagnitude < 102)
+            if ((pw - transform.position).sqrMagnitude < 103)
             this.target2D.target = pw;
         }
 #endif
