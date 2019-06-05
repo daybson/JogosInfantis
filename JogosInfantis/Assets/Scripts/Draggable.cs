@@ -5,24 +5,23 @@ using UnityEngine.EventSystems;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private float z;
+    public float z;
 
     private void Start()
     {
         GameSystem.Instance.CheckForDragRequirements();
-        this.z = GameSystem.Instance.MainCamera.nearClipPlane;
     }
 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Begin drag");
+        //Debug.Log("Begin drag");
     }
 
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Dragging");
+        //Debug.Log("Dragging");
         Vector3 worldPosition;
 
 #if UNITY_EDITOR
@@ -39,6 +38,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("End drag");
+        //Debug.Log("End drag");
     }
 }
