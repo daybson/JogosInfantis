@@ -25,7 +25,7 @@ public class ColorName : MonoBehaviour
 
         for (int i = 0; i < Names.Length; i++)
         {
-            var index = Random.Range(0, Names.Length);
+            int index = Random.Range(0, Names.Length);
             if (blackList.Contains(index))
             {
                 i--;
