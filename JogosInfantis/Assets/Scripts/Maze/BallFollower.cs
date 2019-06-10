@@ -32,7 +32,7 @@ public class BallFollower : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             var pw = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if ((pw - transform.position).sqrMagnitude < 103)
+            //if ((pw - transform.position).sqrMagnitude < 103)
             this.target2D.target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 #endif
@@ -43,7 +43,7 @@ public class BallFollower : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             var t = Input.GetTouch(0);
             var pw = Camera.main.ScreenToWorldPoint(new Vector3(t.position.x, t.position.y, 0));
 
-            if ((pw - transform.position).sqrMagnitude < 103)
+            //if ((pw - transform.position).sqrMagnitude < 103)
             this.target2D.target = pw;
         }
 #endif
