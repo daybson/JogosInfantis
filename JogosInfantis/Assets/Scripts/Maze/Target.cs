@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+    public Transform targetTransform;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {        
-        MazeUIController.Instance.SetUIStatus(true);
-
-        collision.transform.position = transform.position;
+        collision.transform.position = targetTransform.position;
         collision.GetComponent<BallFollower>().enabled = false;        
+        MazeUIController.Instance.SetUIStatus(true);
     }
 }
