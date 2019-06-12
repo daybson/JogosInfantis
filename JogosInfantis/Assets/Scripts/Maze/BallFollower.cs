@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(TargetJoint2D))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class BallFollower : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class BallFollower : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
     public Transform RespawnBall;
     private TargetJoint2D target2D;
     private new Rigidbody2D rigidbody2D;
-    private bool hover;
+    public float minDistance;
+
+    //private bool hover;
 
     private void Awake()
     {
@@ -20,10 +22,14 @@ public class BallFollower : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         this.rigidbody2D = GetComponent<Rigidbody2D>();
         this.rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        ResetPosition();
+        Respawn();
     }
 
-    public void ResetPosition() => transform.position = RespawnBall.position;
+    public void Respawn()
+    {
+        enabled = true;
+        transform.position = RespawnBall.position;
+    }
 
 
     private void Start()
@@ -39,8 +45,8 @@ public class BallFollower : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             var pw = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            //if ((pw - transform.position).sqrMagnitude < 103)
-            this.target2D.target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if ((pw - transform.position).sqrMagnitude < this.minDistance)
+                this.target2D.target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 #endif
 
@@ -50,13 +56,12 @@ public class BallFollower : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             var t = Input.GetTouch(0);
             var pw = Camera.main.ScreenToWorldPoint(new Vector3(t.position.x, t.position.y, 0));
 
-            //if ((pw - transform.position).sqrMagnitude < 103)
-            this.target2D.target = pw;
+            if ((pw - transform.position).sqrMagnitude < this.minDistance)
+                this.target2D.target = pw;
         }
 #endif
     }
 
-    public void OnPointerEnter(PointerEventData eventData) => hover = true;
-
-    public void OnPointerExit(PointerEventData eventData) => hover = false;
+    //public void OnPointerEnter(PointerEventData eventData) => hover = true;
+    //public void OnPointerExit(PointerEventData eventData) => hover = false;
 }

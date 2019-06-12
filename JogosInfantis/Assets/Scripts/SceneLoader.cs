@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public static int IndexMazeLevels;
+
     public void LoadScene(int i)
     {
         SceneManager.LoadScene(i);
