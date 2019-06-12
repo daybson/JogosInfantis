@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 public class MazeController : Singleton<MazeController>
 {
@@ -28,6 +29,15 @@ public class MazeController : Singleton<MazeController>
         Mazes[currentMaze].gameObject.SetActive(true);
     }
 
+    internal void PlayPause()
+    {
+        
+    }
+
+    internal void ShowConfigPanel()
+    {
+        
+    }
 
     public void CheckForDragRequirements()
     {
