@@ -27,7 +27,7 @@ public class Clickable : MonoBehaviour
 
     private void OnMouseDown()
     {
-        isFade = click.Invoke(text.text);
+        isFade = click.Invoke(text.text.ToUpper());
 
         if (isFade)
             sprite.color = Color.green;

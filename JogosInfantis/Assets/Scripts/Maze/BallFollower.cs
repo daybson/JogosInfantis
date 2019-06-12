@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +9,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BallFollower : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public Transform RespawnBall;
     private TargetJoint2D target2D;
     private new Rigidbody2D rigidbody2D;
     private bool hover;
@@ -17,7 +19,12 @@ public class BallFollower : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         this.target2D = GetComponent<TargetJoint2D>();
         this.rigidbody2D = GetComponent<Rigidbody2D>();
         this.rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        ResetPosition();
     }
+
+    public void ResetPosition() => transform.position = RespawnBall.position;
+
 
     private void Start()
     {
@@ -28,7 +35,7 @@ public class BallFollower : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private void LateUpdate()
     {
 #if UNITY_EDITOR
-        if (Input.GetMouseButton(0) )
+        if (Input.GetMouseButton(0))
         {
             var pw = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

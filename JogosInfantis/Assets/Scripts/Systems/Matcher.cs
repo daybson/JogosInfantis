@@ -16,9 +16,15 @@ public class Matcher : MonoBehaviour
 
 
     private void Awake()
-    {
+    {        
         this.words = this.Sequence.Split(this.separator);
         this.index = -1;
+
+        for (int i = 0; i < validWords.Count; i++)
+        {
+            validWords[i] = validWords[i].ToUpper();
+        }
+        Sequence = Sequence.ToUpper();
     }
 
     /// <summary>
@@ -32,7 +38,7 @@ public class Matcher : MonoBehaviour
         //else
         this.index = UnityEngine.Random.Range(0, this.words.Length - 1);
 
-        return this.words[this.index];
+        return this.words[this.index].ToUpper();
     }
 
 
