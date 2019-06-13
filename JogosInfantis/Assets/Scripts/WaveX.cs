@@ -11,13 +11,18 @@ public class WaveX : MonoBehaviour
     public float height;
     private float ini;
 
-    private void Start()
+    private void Init()
     {
         var rand = Random.Range(Spawner.ScreenBoundsMin.x, Spawner.ScreenBoundsMax.x);
         transform.position = new Vector3(rand, Spawner.ScreenBoundsMax.y, 0);
         ini = transform.position.x;
 
         this.t = 0;
+    }
+
+    private void OnEnable()
+    {
+        Init();
     }
 
     private void Update()

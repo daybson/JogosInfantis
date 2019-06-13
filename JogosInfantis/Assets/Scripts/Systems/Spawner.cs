@@ -5,20 +5,27 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    public Pool pool;
+
     public static Vector2 ScreenBoundsMin;
     public static Vector2 ScreenBoundsMax;
 
     public float safeMarginX;
     public float safeMarginY;
 
-    public float interval;
     public GameObject obj;
     public Matcher matcher;
 
     private WaitForSeconds waitFor;
 
-    public float levelDuration = 0;
-    private float currentTime = 0;
+    public bool infiniteRun;
+
+    public float spawnTimeStep;
+    public float levelDuration = 0f;
+    private float currentTime = 0f;
+    public int timerIncreaseSpeed = 30;
+    public float inscreaseSpeedStep;
+
 
     private void Awake()
     {
@@ -32,31 +39,36 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        this.waitFor = new WaitForSeconds(this.interval);
-        StartCoroutine(DoSpawn());
-    }
+        InvokeRepeating("DoSpawn", 0, spawnTimeStep);
+        InvokeRepeating("IncreaseSpeed", timerIncreaseSpeed, timerIncreaseSpeed);
 
-
-    private void Update()
-    {
-        this.currentTime += Time.deltaTime;
-    }
-
-    private IEnumerator DoSpawn()
-    {
-        while (this.currentTime <= this.levelDuration)
+        if (!infiniteRun)
         {
-            Spawn(this.obj, this.matcher.GetNextWord());
-            yield return this.waitFor;
+            Invoke("FinishLevel", levelDuration);
         }
     }
 
 
-    private void Spawn(GameObject what, string text)
+    private void IncreaseSpeed()
     {
-        
-        var o = Instantiate(what);
-        //o.transform.position = new Vector3(0, this.topY, 0);
-        o.GetComponentInChildren<Text>().text = text;
+        this.spawnTimeStep -= this.spawnTimeStep * (inscreaseSpeedStep / 100);
+        CancelInvoke("DoSpawn");
+        InvokeRepeating("DoSpawn", 0, spawnTimeStep);
+    }
+
+
+    private void FinishLevel()
+    {
+        CancelInvoke("DoSpawn");
+        CancelInvoke("IncreaseSpeed");
+        BaloonsUIController.Instance.SetUIStatus(true);
+    }
+
+
+    private void DoSpawn()
+    {
+        var o = pool.RequestProjectile();
+        if (o != null)
+            o.GetComponentInChildren<Text>().text = this.matcher.GetNextWord();
     }
 }

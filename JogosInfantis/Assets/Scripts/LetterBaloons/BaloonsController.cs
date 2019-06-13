@@ -3,16 +3,11 @@ using System.Collections;
 
 public class BaloonsController : MonoBehaviour
 {
+    public float spawnTimer;
+    public float spawnIncreaseSpeed = 0.1f;
 
-    // Use this for initialization
-    void Start()
+    private void Update()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        
     }
 }

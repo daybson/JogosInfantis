@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BaloonsUIController : MonoBehaviour
+public class BaloonsUIController : Singleton<BaloonsUIController>
 {
     public UIPanelLevelComplete UIPanelLevelComplete;
     public UIIngameButtons UIIngameButtons;
