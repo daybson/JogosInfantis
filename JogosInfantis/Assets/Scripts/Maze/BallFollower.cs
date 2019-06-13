@@ -15,6 +15,8 @@ public class BallFollower : MonoBehaviour//, IPointerEnterHandler, IPointerExitH
     public float minDistance;
 
     //private bool hover;
+    //public void OnPointerEnter(PointerEventData eventData) => hover = true;
+    //public void OnPointerExit(PointerEventData eventData) => hover = false;
 
     private void Awake()
     {
@@ -60,8 +62,5 @@ public class BallFollower : MonoBehaviour//, IPointerEnterHandler, IPointerExitH
                 this.target2D.target = pw;
         }
 #endif
-    }
-
-    //public void OnPointerEnter(PointerEventData eventData) => hover = true;
-    //public void OnPointerExit(PointerEventData eventData) => hover = false;
+    }    
 }

@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MazeUIController : Singleton<MazeUIController>
+public class BaloonsUIController : MonoBehaviour
 {
     public UIPanelLevelComplete UIPanelLevelComplete;
     public UIIngameButtons UIIngameButtons;
@@ -11,18 +11,13 @@ public class MazeUIController : Singleton<MazeUIController>
 
     private void Awake()
     {
-        //UIPanelLevelComplete = FindObjectOfType<UIPanelLevelComplete>();
-        //UIIngameButtons = FindObjectOfType<UIIngameButtons>();
-        //UIPanelYesNo = FindObjectOfType<UIPanelYesNo>();
-
-
-        UIPanelLevelComplete.buttonNext.onClick.AddListener(() => MazeController.Instance.LoadNextMaze());
-        UIPanelLevelComplete.buttonReplay.onClick.AddListener(() => MazeController.Instance.LoadCurrentMaze());
+        //UIPanelLevelComplete.buttonNext.onClick.AddListener(() => MazeController.Instance.LoadNextMaze());
+        //UIPanelLevelComplete.buttonReplay.onClick.AddListener(() => MazeController.Instance.LoadCurrentMaze());
         UIPanelLevelComplete.buttonBack.onClick.AddListener(() => SceneManager.LoadScene(SceneLoader.IndexMazeLevels));
 
-
+        //TODO: Mudar para outra classe ao invés de MazeController
         //UIIngameButtons.ButtonPausePlay.onClick.AddListener(() => MazeController.Instance.PlayPause());
-        UIIngameButtons.ButtonConfigs.onClick.AddListener(() => MazeController.Instance.ShowConfigPanel());
+        //UIIngameButtons.ButtonConfigs.onClick.AddListener(() => MazeController.Instance.ShowConfigPanel());
         UIIngameButtons.ButtonExit.onClick.AddListener(() =>
 
         {
