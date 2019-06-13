@@ -15,7 +15,7 @@ public class MazeController : Singleton<MazeController>
 
     public Camera MainCamera { get; private set; }
 
-    public bool IsLastLevel => currentMaze == Mazes.Count;
+    public bool IsLastLevel => currentMaze == Mazes.Count - 1;
 
 
     private void Awake()
@@ -31,12 +31,12 @@ public class MazeController : Singleton<MazeController>
 
     internal void PlayPause()
     {
-        
+
     }
 
     internal void ShowConfigPanel()
     {
-        
+
     }
 
     public void CheckForDragRequirements()

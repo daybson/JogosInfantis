@@ -7,6 +7,8 @@ public class UIPanelLevelComplete : MonoBehaviour
 {
     public Text title;
 
+    public Button buttonClose;
+
     public Button buttonReplay;
     public Text textButtonReplay;
 
@@ -15,4 +17,9 @@ public class UIPanelLevelComplete : MonoBehaviour
 
     public Button buttonBack;
     public Text textButtonBack;
+
+    private void Awake()
+    {
+        buttonClose.onClick.AddListener(() => gameObject.SetActive(false));
+    }
 }

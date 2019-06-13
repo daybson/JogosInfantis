@@ -22,9 +22,8 @@ public class Matcher : MonoBehaviour
 
         for (int i = 0; i < validWords.Count; i++)
         {
-            validWords[i] = validWords[i].ToUpper();
+            validWords[i] = validWords[i];
         }
-        Sequence = Sequence.ToUpper();
     }
 
     /// <summary>
@@ -38,7 +37,7 @@ public class Matcher : MonoBehaviour
         //else
         this.index = UnityEngine.Random.Range(0, this.words.Length - 1);
 
-        return this.words[this.index].ToUpper();
+        return this.words[this.index];
     }
 
 

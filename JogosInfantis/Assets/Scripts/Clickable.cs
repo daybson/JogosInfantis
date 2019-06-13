@@ -11,6 +11,9 @@ public class Clickable : MonoBehaviour
     public float fadeSpeed;
     private bool isFade;
 
+    public AudioSource SuccessAudio;
+    public AudioSource FailureAudio;
+
     public Color[] colors;
 
     private void Awake()
@@ -30,9 +33,16 @@ public class Clickable : MonoBehaviour
         isFade = click.Invoke(text.text.ToUpper());
 
         if (isFade)
+        {
             sprite.color = Color.green;
+            SuccessAudio.Play();
+        }
         else
+        {
+            Handheld.Vibrate();
             sprite.color = Color.red;
+            FailureAudio.Play();
+        }
     }
 
 

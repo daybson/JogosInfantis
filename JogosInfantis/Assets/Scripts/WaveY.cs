@@ -10,11 +10,17 @@ public class WaveY : MonoBehaviour
     private float cos;
     public float height;
     private float ini;
+    public bool RandStart;
+    public bool ClampOnScreen;
 
     private void Start()
     {
-        var rand = Random.Range(Spawner.ScreenBoundsMin.y, Spawner.ScreenBoundsMax.y);
-        transform.position = new Vector3(Spawner.ScreenBoundsMin.x, rand, 0);
+        if (RandStart)
+        {
+            var rand = Random.Range(Spawner.ScreenBoundsMin.y, Spawner.ScreenBoundsMax.y);
+            transform.position = new Vector3(Spawner.ScreenBoundsMin.x, rand, 0);
+        }
+
         ini = transform.position.y;
 
         this.t = 0;
@@ -27,5 +33,11 @@ public class WaveY : MonoBehaviour
         var offset = ini + this.height * Mathf.Sin(this.t * this.waveSpeed);
 
         transform.position = new Vector3(transform.position.x + this.linearSpeed * Time.deltaTime, offset, 0);
+    }
+
+    private void OnBecameInvisible()
+    {
+        if (ClampOnScreen)
+            transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
     }
 }
