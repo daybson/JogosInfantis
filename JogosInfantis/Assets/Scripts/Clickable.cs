@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Clickable : MonoBehaviour
@@ -16,17 +17,31 @@ public class Clickable : MonoBehaviour
 
     public Color[] colors;
 
+    private IPoolItem ipool;
+
+
     private void Awake()
     {
+        ipool = GetComponent<IPoolItem>();
         click = FindObjectOfType<Matcher>().Check;
         sprite.color = colors[Random.Range(0, colors.Length - 1)];
     }
+
+
+    private void OnEnable()
+    {
+        isFade = false;
+        sprite.color = colors[Random.Range(0, colors.Length - 1)];
+        this.text.color = Color.white;
+    }
+
 
     private void Update()
     {
         if (isFade)
             Fade();
     }
+   
 
     private void OnMouseDown()
     {
@@ -45,6 +60,11 @@ public class Clickable : MonoBehaviour
         }
     }
 
+
+    private void OnBecameInvisible()
+    {
+        ipool.Disable();
+    }
 
     public void Fade()
     {
@@ -65,6 +85,6 @@ public class Clickable : MonoBehaviour
             a);
 
         if (a == 0)
-            gameObject.transform.root.gameObject.SetActive(false);
+            ipool.Disable();
     }
 }

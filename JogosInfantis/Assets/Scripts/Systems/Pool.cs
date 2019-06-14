@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class Pool : MonoBehaviour
 {
-    public int maxProjectilesPerPool;
-    private List<GameObject> projectiles = new List<GameObject>();
-    public string ProjetilePrefabName;
+    public int maxPoolItems;
+    public List<IPoolItem> items = new List<IPoolItem>();
+    public string ItemPrefabName;
 
     private void Awake()
     {
@@ -19,68 +19,36 @@ public class Pool : MonoBehaviour
 
     private void Initialize()
     {
-        var p = Instantiate(Resources.Load<GameObject>("Prefabs/" + ProjetilePrefabName));
-        p.SetActive(false);
+        var p = Instantiate(Resources.Load<GameObject>("Prefabs/" + ItemPrefabName));
 
-        for (var i = 0; i < this.maxProjectilesPerPool; i++)
+        for (var i = 0; i < this.maxPoolItems; i++)
         {
-            var obj = Instantiate(p);            
-            this.projectiles.Add(obj);
+            var obj = Instantiate(p);
+            var ip = obj.GetComponent<IPoolItem>();
+            ip.Disable();
+            this.items.Add(ip);
         }
-
+        
         Destroy(p);
     }
 
-
-    public bool RequestProjectile(Transform origin)
+    public IPoolItem RequestItem()
     {
-        var projectile = this.projectiles.FirstOrDefault(p => !p.activeSelf);
+        var i = this.items.FirstOrDefault(p => !p.IsUpdating);
 
-        if (projectile != null)
+        if (i != null)
         {
-            projectile.transform.position = origin.position;
-            projectile.transform.up = origin.up;
-            projectile.SetActive(true);
-            return true;
-        }
-
-        Debug.LogWarning("All objects in use!");
-        return false;
-    }
-
-    public GameObject RequestProjectile()
-    {
-        var projectile = this.projectiles.FirstOrDefault(p => !p.activeSelf);
-
-        if (projectile != null)
-        {
-            //projectile.transform.position = origin.position;
-            //projectile.transform.up = origin.up;
-            projectile.SetActive(true);
-            return projectile;
+            print("Item enabled");
+            i.Enable();
+            return i;
         }
 
         Debug.LogWarning("All objects in use!");
         return null;
     }
 
-
-    //public void DeactivateProjectile(int key)
-    //{
-    //    try
-    //    {
-    //        this.projectiles[key].SetActive(false);
-    //    }
-    //    catch
-    //    {
-    //        Debug.LogWarning($"Error when accessing projectiles dictionary! Key received: {key}");
-    //    }
-    //}
-
-
-    public void ResetAllProjectiles()
+    public void DisablePoolItems()
     {
-        for (int i = 0; i < this.maxProjectilesPerPool; i++)
-            this.projectiles[i].SetActive(false);
+        this.items.ForEach(p => p.Disable());
     }
 }
