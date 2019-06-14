@@ -38,7 +38,6 @@ public class Pool : MonoBehaviour
 
         if (i != null)
         {
-            print("Item enabled");
             i.Enable();
             return i;
         }

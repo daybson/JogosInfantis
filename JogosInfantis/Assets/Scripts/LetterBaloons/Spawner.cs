@@ -77,7 +77,6 @@ public class Spawner : MonoBehaviour
         {
             DoSpawn();
             spawnTimer = 0;
-            print("Spawn");
         }
 
         if (speedTimer > increaseSpeedTimeStep)
@@ -85,8 +84,6 @@ public class Spawner : MonoBehaviour
             IncreaseSpeed();
             speedTimer = 0;
         }
-
-
     }
 
 
