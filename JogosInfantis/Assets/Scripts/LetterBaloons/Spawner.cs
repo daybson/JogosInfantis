@@ -45,6 +45,7 @@ public class Spawner : MonoBehaviour
     public float increaseLinearSpeedPercentage;
     public float maxLinear;
 
+
     private void Awake()
     {
         ScreenBoundsMin = GameSystem.Instance.MainCamera.ViewportToWorldPoint(Vector3.zero);
