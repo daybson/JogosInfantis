@@ -23,11 +23,11 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
         UIPanelLevelComplete.buttonBack.onClick.AddListener(() => SceneManager.LoadScene(SceneLoader.IndexMazeLevels));
 
 
-        GameSystem.Instance.PlayGame  += () =>
-        {
-            //AmbientMusic.Play();
-            UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.pause;
-        };
+        GameSystem.Instance.PlayGame += () =>
+       {
+           //AmbientMusic.Play();
+           UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.pause;
+       };
         GameSystem.Instance.PauseGame += () =>
         {
             //AmbientMusic.Pause();
@@ -56,11 +56,24 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
         UIPanelYesNo.OnShow += () => BackgroundBlock.SetActive(true);
         UIPanelYesNo.OnClose += () => BackgroundBlock.SetActive(false);
         UIPanelYesNo.ClickYes += () => SceneManager.LoadScene(SceneLoader.MainScene);
+
+        //Panel Complete
+        UIPanelLevelComplete.OnShow += () => BackgroundBlock.SetActive(true);
+        UIPanelLevelComplete.OnClose += () => BackgroundBlock.SetActive(false);
     }
 
 
-    public void SetUIStatus(bool status)
+    public void FinishLevel(bool status)
     {
-        UIPanelLevelComplete.gameObject.SetActive(status);
+        print(ScoreCounter.Instance.Ratio);
+
+        if (ScoreCounter.Instance.Ratio < 0.6f)
+            UIPanelLevelComplete.Show("TENTE DE NOVO!", "ERROU MUITAS...");
+
+        else if (ScoreCounter.Instance.Ratio >= 0.6f && ScoreCounter.Instance.Ratio < 1f)
+            UIPanelLevelComplete.Show("MUITO BEM!", "ACERTOU QUASE TODAS!");
+
+        else if (ScoreCounter.Instance.Ratio == 1f)
+            UIPanelLevelComplete.Show("PERFEITO!", "ACERTOU TODAS!");
     }
 }

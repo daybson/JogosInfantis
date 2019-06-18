@@ -5,11 +5,9 @@ using UnityEngine;
 
 public delegate bool CheckItem(string item);
 
-public class Matcher : MonoBehaviour
+public class Matcher : Singleton<Matcher>
 {
-    public ScoreCounter Score;
     public List<string> validWords;
-
     public string Sequence;
     private string[] words;
     public char separator;
@@ -27,29 +25,27 @@ public class Matcher : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Retorna a próxima palavra da lista, ou uma palavra aleatória se houver chegado ao fim da lista
-    /// </summary>
-    /// <returns>Palavra contida na lista</returns>
+
     public string GetNextWord()
     {
-        //if (this.index < this.words.Length-1)
-        //    this.index++;
-        //else
         this.index = UnityEngine.Random.Range(0, this.words.Length - 1);
 
         return this.words[this.index];
     }
 
 
-    public bool Check(string item)
+    public bool Check(string item) => validWords.Contains(item);
+
+
+
+    public bool IncreaseScore(string item)
     {
-        var answer = validWords.Contains(item);
+        var answer = Check(item);
 
         if (answer)
-            Score.Right++;
+            ScoreCounter.Instance.CheckedRight++;
         else
-            Score.Wrong++;
+            ScoreCounter.Instance.CheckedWrong++;
 
         return answer;
     }

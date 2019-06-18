@@ -23,7 +23,7 @@ public class Clickable : MonoBehaviour
     private void Awake()
     {
         ipool = GetComponent<IPoolItem>();
-        click = FindObjectOfType<Matcher>().Check;
+        click = FindObjectOfType<Matcher>().IncreaseScore;
         sprite.color = colors[Random.Range(0, colors.Length - 1)];
 
         AudioController.Instance.AddIngameAudio(SuccessAudio);

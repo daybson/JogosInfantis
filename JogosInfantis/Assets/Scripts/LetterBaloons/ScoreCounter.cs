@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScoreCounter : MonoBehaviour
+public class ScoreCounter : Singleton<ScoreCounter>
 {
-    public int Right;
-    public int Wrong;
+    public int CheckedRight;
+    public int CheckedWrong;
+    public int RightSpawnCount;
+    public int WrongSpawnCount;
 
-    public float Ratio => (float)Right / Wrong;
+    public float Ratio => (float)(CheckedRight - CheckedWrong) / RightSpawnCount;
 
 }

@@ -18,8 +18,10 @@ public class Spawner : MonoBehaviour
 
     private WaitForSeconds waitFor;
 
+    //public int SpawnCount;// { get; private set; } = 0;
 
     [Space()]
+    public Image ClockFill;
     public bool finiteGame;
     public float spawnTimeStep;
     public float levelDuration = 0f;
@@ -66,10 +68,12 @@ public class Spawner : MonoBehaviour
         spawnTimer += Time.deltaTime;
         speedTimer += Time.deltaTime;
 
+
         if (finiteGame)
         {
             endgameTimer += Time.deltaTime;
 
+            ClockFill.fillAmount = endgameTimer / levelDuration;
             if (endgameTimer > levelDuration)
                 FinishLevel();
         }
@@ -111,7 +115,7 @@ public class Spawner : MonoBehaviour
     {
         running = false;
         pool.DisablePoolItems();
-        BaloonsUIController.Instance.SetUIStatus(true);
+        BaloonsUIController.Instance.FinishLevel(true);
     }
 
 
@@ -127,6 +131,11 @@ public class Spawner : MonoBehaviour
             wx.waveSpeed = this.waveSpeedBaloon;
             wx.height = this.heightBaloon;
             o.Enable();
+
+            if (Matcher.Instance.Check(wx.text.text))
+                ScoreCounter.Instance.RightSpawnCount++;
+            else
+                ScoreCounter.Instance.WrongSpawnCount++;
         }
     }
 }
