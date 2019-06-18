@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class AudioController : Singleton<AudioController>
 {
-    public static int UI_AUDIO = 0;
-    public static int INGAME_AUDIO = 0;
-
     public List<AudioSource> IngameAudios = new List<AudioSource>();
     public List<AudioSource> UIAudios = new List<AudioSource>();
 

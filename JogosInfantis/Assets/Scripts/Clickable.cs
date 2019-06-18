@@ -66,7 +66,7 @@ public class Clickable : MonoBehaviour
         }
         else
         {
-            Handheld.Vibrate();
+            GameSystem.Instance.RequestVibration();
             sprite.color = Color.red;
             FailureAudio.Play();
         }

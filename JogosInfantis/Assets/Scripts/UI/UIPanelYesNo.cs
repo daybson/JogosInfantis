@@ -19,25 +19,40 @@ public class UIPanelYesNo : MonoBehaviour
 
     public UnityAction ClickYes;
     public UnityAction ClickNo;
+    public UnityAction OnClose;
+    public UnityAction OnShow;
 
     private void Awake()
     {
         buttonYes.onClick.AddListener(() =>
         {
-            gameObject.SetActive(false);
+            GameSystem.Instance.TogglePlayPauseGame();
+
+            OnClose?.Invoke();
             ClickYes?.Invoke();
+            gameObject.SetActive(false);
         });
 
         buttonNo.onClick.AddListener(() =>
         {
-            gameObject.SetActive(false);
+            GameSystem.Instance.TogglePlayPauseGame();
+
+            OnClose?.Invoke();
             ClickNo?.Invoke();
+            gameObject.SetActive(false);
         });
     }
 
 
     public void Show(string title, string message = null)
     {
+        if (gameObject.activeSelf)
+            return;
+
+        OnShow?.Invoke();
+
+        GameSystem.Instance.TogglePlayPauseGame();
+
         this.title.text = title;
 
         if (string.IsNullOrWhiteSpace(message))

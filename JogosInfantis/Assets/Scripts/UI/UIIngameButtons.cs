@@ -16,4 +16,14 @@ public class UIIngameButtons : MonoBehaviour
     public Button ButtonExit;
     public Text TextExit;
 
+
+    private void Awake()
+    {
+        ButtonPausePlay.onClick.AddListener(() =>
+        {
+            GameSystem.Instance.TogglePlayPauseGame();
+        });
+
+        
+    }
 }

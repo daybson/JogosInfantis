@@ -12,51 +12,50 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
     public UIPanelOptions UIPanelOptions;
     public AudioMixer mixer;
     public AudioSource AmbientMusic;
+    public GameObject BackgroundBlock;
 
 
     private void Awake()
     {
         AudioController.Instance.AddIngameAudio(AmbientMusic);
 
+
         UIPanelLevelComplete.buttonBack.onClick.AddListener(() => SceneManager.LoadScene(SceneLoader.IndexMazeLevels));
 
-        UIIngameButtons.ButtonPausePlay.onClick.AddListener(() =>
+
+        GameSystem.Instance.PlayGame  += () =>
         {
-            if (GameSystem.Instance.IsRunning)
-            {
-                AmbientMusic.Pause();
-                UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.play;
-            }
-            else
-            {
-                AmbientMusic.Play();
-                UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.pause;
-            }
+            AmbientMusic.Play();
+            UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.pause;
+        };
+        GameSystem.Instance.PauseGame += () =>
+        {
+            AmbientMusic.Pause();
+            UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.play;
+        };
 
-            GameSystem.Instance.IsRunning = !GameSystem.Instance.IsRunning;
-        }
-        );
 
-        UIIngameButtons.ButtonConfigs.onClick.AddListener(() => UIPanelOptions.Show());
+        UIIngameButtons.ButtonConfigs.onClick.AddListener(() =>
+        {
+            UIPanelOptions.Show();
+        });
+
+
         UIIngameButtons.ButtonExit.onClick.AddListener(() =>
         {
-            UIPanelYesNo.ClickYes += () => SceneManager.LoadScene(SceneLoader.MainScene);
             UIPanelYesNo.Show("SAIR?");
         });
 
 
-        UIPanelOptions.toggle.onValueChanged.AddListener((a) => PlayerPrefs.SetInt("Vibration", a ? 1 : 0));
+        //Panel Options
+        UIPanelOptions.OnShow += () => BackgroundBlock.SetActive(true);
+        UIPanelOptions.OnClose += () => BackgroundBlock.SetActive(false);
 
 
-        UIPanelOptions.slider.value = PlayerPrefs.GetFloat("ParamVolume");
-        AudioController.Instance.ChangeVolumeAllAudios(UIPanelOptions.slider.value);
-
-
-        UIPanelOptions.slider.onValueChanged.AddListener((v) =>
-        {
-            PlayerPrefs.SetFloat("ParamVolume", v);
-            AudioController.Instance.ChangeVolumeAllAudios(v);
-        });
+        //Panel YesNo
+        UIPanelYesNo.OnShow += () => BackgroundBlock.SetActive(true);
+        UIPanelYesNo.OnClose += () => BackgroundBlock.SetActive(false);
+        UIPanelYesNo.ClickYes += () => SceneManager.LoadScene(SceneLoader.MainScene);
     }
 
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class GameSystem : Singleton<GameSystem>
@@ -11,15 +12,24 @@ public class GameSystem : Singleton<GameSystem>
     public Camera MainCamera { get; private set; }
 
     public bool IsRunning { get; set; } = true;
+    public bool Vibrate { get; private set; }
+
+    public UnityAction PlayGame;
+    public UnityAction PauseGame;
 
 
     private void Awake()
     {
+        LoadVibrationPreference();
         MainCamera = Camera.main;
     }
 
 
-    #region Logic
+    public void LoadVibrationPreference()
+    {
+        Vibrate = PlayerPrefs.GetInt("Vibration") == 1;
+    }
+
 
     public void CheckForDragRequirements()
     {
@@ -35,6 +45,30 @@ public class GameSystem : Singleton<GameSystem>
 
 
 
-    #endregion
+    public void RequestVibration()
+    {
+        if (Vibrate)
+            Handheld.Vibrate();
+    }
 
+
+    public void TogglePlayPauseGame()
+    {
+        if (IsRunning)
+            Pause();
+        else
+            Play();
+    }
+
+    private void Pause()
+    {
+        IsRunning = false;
+        PauseGame?.Invoke();
+    }
+
+    private void Play()
+    {
+        IsRunning = true;
+        PlayGame?.Invoke();
+    }
 }
