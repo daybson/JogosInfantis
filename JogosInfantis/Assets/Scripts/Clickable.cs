@@ -30,6 +30,9 @@ public class Clickable : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!GameSystem.Instance.IsRunning)
+            return;
+
         isFade = false;
         sprite.color = colors[Random.Range(0, colors.Length - 1)];
         this.text.color = Color.white;
@@ -38,6 +41,9 @@ public class Clickable : MonoBehaviour
 
     private void Update()
     {
+        if (!GameSystem.Instance.IsRunning)
+            return;
+
         if (isFade)
             Fade();
     }
@@ -45,6 +51,9 @@ public class Clickable : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (!GameSystem.Instance.IsRunning)
+            return;
+
         isFade = click.Invoke(text.text.ToUpper());
 
         if (isFade)

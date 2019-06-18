@@ -11,16 +11,32 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
     public UIPanelYesNo UIPanelYesNo;
     public UIPanelOptions UIPanelOptions;
     public AudioMixer mixer;
-
+    public AudioSource AmbientMusic;
 
     private void Awake()
     {
         //UIPanelLevelComplete.buttonNext.onClick.AddListener(() => MazeController.Instance.LoadNextMaze());
-        //UIPanelLevelComplete.buttonReplay.onClick.AddListener(() => MazeController.Instance.LoadCurrentMaze());
+        //UIPanelLevelComplete.buttonReplay.onClick.AddListener(() => GameSystem.Instance.IsRunning = !GameSystem.Instance.IsRunning);
         UIPanelLevelComplete.buttonBack.onClick.AddListener(() => SceneManager.LoadScene(SceneLoader.IndexMazeLevels));
 
         //TODO: Mudar para outra classe ao invés de MazeController
-        //UIIngameButtons.ButtonPausePlay.onClick.AddListener(() => MazeController.Instance.PlayPause());
+        UIIngameButtons.ButtonPausePlay.onClick.AddListener(() =>
+        {
+            if (GameSystem.Instance.IsRunning)
+            {
+                AmbientMusic.Pause();
+                UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.play;
+            }
+            else
+            {
+                AmbientMusic.Play();
+                UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.pause;
+            }
+
+            GameSystem.Instance.IsRunning = !GameSystem.Instance.IsRunning;
+        }
+        );
+
         UIIngameButtons.ButtonConfigs.onClick.AddListener(() => UIPanelOptions.Show());
         UIIngameButtons.ButtonExit.onClick.AddListener(() =>
         {

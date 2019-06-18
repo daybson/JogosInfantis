@@ -10,6 +10,8 @@ public class GameSystem : Singleton<GameSystem>
 {
     public Camera MainCamera { get; private set; }
 
+    public bool IsRunning { get; set; } = true;
+
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class GameSystem : Singleton<GameSystem>
         if (FindObjectOfType<Physics2DRaycaster>() == null)
             Debug.LogError("There's no Physics2DRaycaster in scene. Drag events will not work!");
     }
+
 
 
     #endregion

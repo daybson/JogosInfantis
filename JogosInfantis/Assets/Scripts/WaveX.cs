@@ -15,7 +15,6 @@ public class WaveX : MonoBehaviour, IPoolItem
     public Text text;
     public SpriteRenderer sprite;
     public Clickable clickable;
-    public bool updating;
 
     public bool IsUpdating { get; private set; }
 
@@ -41,8 +40,7 @@ public class WaveX : MonoBehaviour, IPoolItem
 
     private void Update()
     {
-        updating = IsUpdating;
-        if (!IsUpdating)
+        if (!IsUpdating || !GameSystem.Instance.IsRunning)
             return;
 
         this.t += Time.deltaTime;

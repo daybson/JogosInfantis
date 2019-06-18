@@ -60,7 +60,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        if (!running)
+        if (!running || !GameSystem.Instance.IsRunning)
             return;
 
         spawnTimer += Time.deltaTime;

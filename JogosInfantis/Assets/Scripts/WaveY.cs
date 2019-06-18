@@ -28,6 +28,9 @@ public class WaveY : MonoBehaviour
 
     private void Update()
     {
+        if (!GameSystem.Instance.IsRunning)
+            return;
+
         this.t += Time.deltaTime;
 
         var offset = ini + this.height * Mathf.Sin(this.t * this.waveSpeed);

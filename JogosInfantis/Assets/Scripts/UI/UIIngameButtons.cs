@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class UIIngameButtons : MonoBehaviour
 {
     public Button ButtonPausePlay;
+    public Sprite play;
+    public Sprite pause;
     public Text TextPausePlay;
 
     public Button ButtonConfigs;
