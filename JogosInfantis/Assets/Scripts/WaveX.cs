@@ -18,12 +18,14 @@ public class WaveX : MonoBehaviour, IPoolItem
 
     public bool IsUpdating { get; private set; }
 
+
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
         text = GetComponentInChildren<Text>();
         clickable = GetComponentInChildren<Clickable>();
     }
+
 
     public void Enable()
     {
@@ -38,6 +40,7 @@ public class WaveX : MonoBehaviour, IPoolItem
         clickable.enabled = true;
     }
 
+
     private void Update()
     {
         if (!IsUpdating || !GameSystem.Instance.IsRunning)
@@ -49,6 +52,7 @@ public class WaveX : MonoBehaviour, IPoolItem
 
         transform.position = new Vector3(offset, transform.position.y + this.linearSpeed * Time.deltaTime, 0);
     }
+
 
     public void Disable()
     {

@@ -25,6 +25,9 @@ public class Clickable : MonoBehaviour
         ipool = GetComponent<IPoolItem>();
         click = FindObjectOfType<Matcher>().Check;
         sprite.color = colors[Random.Range(0, colors.Length - 1)];
+
+        AudioController.Instance.AddIngameAudio(SuccessAudio);
+        AudioController.Instance.AddIngameAudio(FailureAudio);
     }
 
 
@@ -47,11 +50,11 @@ public class Clickable : MonoBehaviour
         if (isFade)
             Fade();
     }
-   
+
 
     private void OnMouseDown()
     {
-        if (!GameSystem.Instance.IsRunning)
+        if (!GameSystem.Instance.IsRunning || !enabled)
             return;
 
         isFade = click.Invoke(text.text.ToUpper());
@@ -74,6 +77,7 @@ public class Clickable : MonoBehaviour
     {
         ipool.Disable();
     }
+
 
     public void Fade()
     {

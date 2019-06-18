@@ -13,13 +13,13 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
     public AudioMixer mixer;
     public AudioSource AmbientMusic;
 
+
     private void Awake()
     {
-        //UIPanelLevelComplete.buttonNext.onClick.AddListener(() => MazeController.Instance.LoadNextMaze());
-        //UIPanelLevelComplete.buttonReplay.onClick.AddListener(() => GameSystem.Instance.IsRunning = !GameSystem.Instance.IsRunning);
+        AudioController.Instance.AddIngameAudio(AmbientMusic);
+
         UIPanelLevelComplete.buttonBack.onClick.AddListener(() => SceneManager.LoadScene(SceneLoader.IndexMazeLevels));
 
-        //TODO: Mudar para outra classe ao invés de MazeController
         UIIngameButtons.ButtonPausePlay.onClick.AddListener(() =>
         {
             if (GameSystem.Instance.IsRunning)
@@ -41,21 +41,24 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
         UIIngameButtons.ButtonExit.onClick.AddListener(() =>
         {
             UIPanelYesNo.ClickYes += () => SceneManager.LoadScene(SceneLoader.MainScene);
-            //UIPanelYesNo.ClickNo += () => UIPanelYesNo.gameObject.SetActive(false);
             UIPanelYesNo.Show("SAIR?");
         });
 
 
-        //---------------------------------------------------------------------------------------------------------
         UIPanelOptions.toggle.onValueChanged.AddListener((a) => PlayerPrefs.SetInt("Vibration", a ? 1 : 0));
 
-        mixer.SetFloat("ParamVolume", PlayerPrefs.GetFloat("ParamVolume"));
+
+        UIPanelOptions.slider.value = PlayerPrefs.GetFloat("ParamVolume");
+        AudioController.Instance.ChangeVolumeAllAudios(UIPanelOptions.slider.value);
+
+
         UIPanelOptions.slider.onValueChanged.AddListener((v) =>
         {
-            mixer.SetFloat("ParamVolume", Mathf.Log10(v) * 20f);
-            PlayerPrefs.SetFloat("ParamVolume", Mathf.Log10(v) * 20f);
+            PlayerPrefs.SetFloat("ParamVolume", v);
+            AudioController.Instance.ChangeVolumeAllAudios(v);
         });
     }
+
 
     public void SetUIStatus(bool status)
     {
