@@ -7,6 +7,7 @@ public delegate bool CheckItem(string item);
 
 public class Matcher : MonoBehaviour
 {
+    public ScoreCounter Score;
     public List<string> validWords;
 
     public string Sequence;
@@ -43,6 +44,13 @@ public class Matcher : MonoBehaviour
 
     public bool Check(string item)
     {
-        return validWords.Contains(item);
+        var answer = validWords.Contains(item);
+
+        if (answer)
+            Score.Right++;
+        else
+            Score.Wrong++;
+
+        return answer;
     }
 }

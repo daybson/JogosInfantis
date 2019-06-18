@@ -11,6 +11,7 @@ public class Clickable : MonoBehaviour
     public event CheckItem click;
     public float fadeSpeed;
     private bool isFade;
+    private bool clicked;
 
     public AudioSource SuccessAudio;
     public AudioSource FailureAudio;
@@ -18,7 +19,6 @@ public class Clickable : MonoBehaviour
     public Color[] colors;
 
     private IPoolItem ipool;
-
 
     private void Awake()
     {
@@ -57,6 +57,11 @@ public class Clickable : MonoBehaviour
         if (!GameSystem.Instance.IsRunning || !enabled)
             return;
 
+        if (!clicked)
+            clicked = true;
+        else
+            return;
+
         isFade = click.Invoke(text.text.ToUpper());
 
         if (isFade)
@@ -75,6 +80,7 @@ public class Clickable : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        clicked = false;
         ipool.Disable();
     }
 

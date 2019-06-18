@@ -493,6 +493,7 @@ GameObject:
   - component: {fileID: 281801196}
   - component: {fileID: 281801198}
   - component: {fileID: 281801199}
+  - component: {fileID: 281801200}
   m_Layer: 0
   m_Name: GameSystem
   m_TagString: Untagged
@@ -512,6 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ba967c9c3386b439a10bed2ef7694c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Score: {fileID: 281801200}
   validWords:
   - A
   - E
@@ -560,6 +562,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IngameAudios: []
   UIAudios: []
+--- !u!114 &281801200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281801195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba99dd3c4a4efac4ab8d8f72b7077f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Right: 0
+  Wrong: 0
 --- !u!114 &321747750 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1083345285, guid: 65ecd94db685c5248909ade91882e631,
@@ -2139,7 +2155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 58.299988, y: 229.3}
+  m_AnchoredPosition: {x: 58.30078, y: 229.29999}
   m_SizeDelta: {x: 116.599976, y: 458.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1093228409

@@ -13,6 +13,7 @@ public class GameSystem : Singleton<GameSystem>
 
     public bool IsRunning { get; set; } = true;
     public bool Vibrate { get; private set; }
+    public float Volume { get; private set; }
 
     public UnityAction PlayGame;
     public UnityAction PauseGame;
@@ -20,10 +21,20 @@ public class GameSystem : Singleton<GameSystem>
 
     private void Awake()
     {
-        LoadVibrationPreference();
-        MainCamera = Camera.main;
+        MainCamera = Camera.main;        
     }
 
+    private void Start()
+    {
+        LoadVibrationPreference();
+        LoadAudioPreference();
+    }
+
+    public void LoadAudioPreference()
+    {
+        Volume = PlayerPrefs.GetFloat("ParamVolume");
+        AudioController.Instance.ChangeVolumeAllAudios(GameSystem.Instance.Volume);
+    }
 
     public void LoadVibrationPreference()
     {

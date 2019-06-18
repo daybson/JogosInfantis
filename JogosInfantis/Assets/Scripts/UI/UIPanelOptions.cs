@@ -34,10 +34,15 @@ public class UIPanelOptions : MonoBehaviour
         slider.onValueChanged.AddListener((v) =>
         {
             PlayerPrefs.SetFloat("ParamVolume", v);
+            GameSystem.Instance.LoadAudioPreference();
             AudioController.Instance.ChangeVolumeAllAudios(v);
         });
-        slider.value = PlayerPrefs.GetFloat("ParamVolume");
-        AudioController.Instance.ChangeVolumeAllAudios(slider.value);
+              
+    }
+
+    private void Start()
+    {
+        slider.value = GameSystem.Instance.Volume;        
     }
 
 

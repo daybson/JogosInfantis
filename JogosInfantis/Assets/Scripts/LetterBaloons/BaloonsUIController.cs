@@ -25,12 +25,12 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
 
         GameSystem.Instance.PlayGame  += () =>
         {
-            AmbientMusic.Play();
+            //AmbientMusic.Play();
             UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.pause;
         };
         GameSystem.Instance.PauseGame += () =>
         {
-            AmbientMusic.Pause();
+            //AmbientMusic.Pause();
             UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.play;
         };
 
