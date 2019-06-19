@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 87293d00fc71b0c45860dd6e1ec5c47e
+guid: 903d223ed59e04646a652c298090a00f
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Minnie
+  fontName: Riffic Free
   fontNames:
-  - Minnie
+  - Riffic Free
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

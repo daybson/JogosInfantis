@@ -639,6 +639,7 @@ MonoBehaviour:
   TextConfigs: {fileID: 8063683340065653388}
   ButtonExit: {fileID: 8063683340932366363}
   TextExit: {fileID: 8063683340709323775}
+  Description: {fileID: 0}
 --- !u!222 &5445297404418186803
 CanvasRenderer:
   m_ObjectHideFlags: 0
