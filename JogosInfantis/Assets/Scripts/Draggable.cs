@@ -22,7 +22,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnDrag(PointerEventData eventData)
     {
         //Debug.Log("Dragging");
-        Vector3 worldPosition;
+        Vector3 worldPosition = Vector3.zero;
 
 #if UNITY_EDITOR
         worldPosition = GameSystem.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);

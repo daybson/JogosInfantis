@@ -72,6 +72,7 @@ public class Clickable : MonoBehaviour
         else
         {
             GameSystem.Instance.RequestVibration();
+
             sprite.color = Color.red;
             FailureAudio.Play();
         }

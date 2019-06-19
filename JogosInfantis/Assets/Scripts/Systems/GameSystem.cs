@@ -21,7 +21,7 @@ public class GameSystem : Singleton<GameSystem>
 
     private void Awake()
     {
-        MainCamera = Camera.main;        
+        MainCamera = Camera.main;
     }
 
     private void Start()
@@ -58,8 +58,10 @@ public class GameSystem : Singleton<GameSystem>
 
     public void RequestVibration()
     {
+#if UNITY_ANDROID || UNITY_IPHONE
         if (Vibrate)
             Handheld.Vibrate();
+#endif
     }
 
 
