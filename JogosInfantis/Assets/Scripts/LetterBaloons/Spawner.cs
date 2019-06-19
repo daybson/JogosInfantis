@@ -114,7 +114,7 @@ public class Spawner : Singleton<Spawner>
         this.spawnTimeStep -= this.spawnTimeStep * (inscreaseSpeedPercentage / 100);
 
         this.currentLinearSpeedBaloon *= 1f + increaseLinearSpeedPercentage / 100;
-        this.currentWaveSpeedBaloon *= 2f + increaseWaveSpeedPercentage / 100;
+        this.currentWaveSpeedBaloon *= 1f + increaseWaveSpeedPercentage / 100;
         this.currentHeightBaloon *= 1f + heightPercentage / 100;
 
         if (linearSpeedBaloon > maxLinear)

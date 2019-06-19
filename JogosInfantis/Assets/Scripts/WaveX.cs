@@ -15,12 +15,14 @@ public class WaveX : MonoBehaviour, IPoolItem
     public Text text;
     public SpriteRenderer sprite;
     public Clickable clickable;
+    //public TrailRenderer trail;
 
     public bool IsUpdating { get; private set; }
 
 
     private void Awake()
     {
+        //trail.enabled = false;
         sprite = GetComponent<SpriteRenderer>();
         text = GetComponentInChildren<Text>();
         clickable = GetComponentInChildren<Clickable>();
@@ -34,6 +36,7 @@ public class WaveX : MonoBehaviour, IPoolItem
         ini = transform.position.x;
 
         this.t = 0;
+        //trail.enabled = true;
         IsUpdating = true;
         text.enabled = true;
         sprite.enabled = true;
@@ -56,6 +59,7 @@ public class WaveX : MonoBehaviour, IPoolItem
 
     public void Disable()
     {
+        //trail.enabled = false;
         IsUpdating = false;
         transform.position = Vector3.zero;
         text.enabled = false;
