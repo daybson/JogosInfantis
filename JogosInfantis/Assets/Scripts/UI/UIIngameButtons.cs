@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIIngameButtons : MonoBehaviour
+public class UIIngameButtons : Singleton<UIIngameButtons>
 {
     public Button ButtonPausePlay;
     public Sprite play;
@@ -16,6 +16,7 @@ public class UIIngameButtons : MonoBehaviour
     public Button ButtonExit;
     public Text TextExit;
 
+    public Text Description;
 
     private void Awake()
     {
@@ -23,7 +24,6 @@ public class UIIngameButtons : MonoBehaviour
         {
             GameSystem.Instance.TogglePlayPauseGame();
         });
-
-        
+       
     }
 }

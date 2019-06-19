@@ -132,7 +132,7 @@ public class Spawner : Singleton<Spawner>
     {
         running = false;
         pool.DisablePoolItems();
-        BaloonsUIController.Instance.FinishLevel(true);
+        BaloonsUIController.Instance.FinishLevel();
     }
 
 

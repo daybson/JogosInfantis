@@ -71,15 +71,15 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
     }
 
 
-    public void FinishLevel(bool status)
+    public void FinishLevel()
     {
         if (ScoreCounter.Instance.Ratio < 0.6f)
-            UIPanelLevelComplete.Show("TENTE DE NOVO!", "ERROU MUITAS...");
+            UIPanelLevelComplete.Show("TENTE DE NOVO!", "ERROU MUITAS LETRAS...");
 
         else if (ScoreCounter.Instance.Ratio >= 0.6f && ScoreCounter.Instance.Ratio < 1f)
-            UIPanelLevelComplete.Show("MUITO BEM!", "ACERTOU QUASE TODAS!");
+            UIPanelLevelComplete.Show("MUITO BEM!", "ACERTOU QUASE TODAS AS LETRAS!");
 
         else if (ScoreCounter.Instance.Ratio == 1f)
-            UIPanelLevelComplete.Show("PERFEITO!", "ACERTOU TODAS!");
+            UIPanelLevelComplete.Show("PERFEITO!", "ACERTOU TODAS AS LETRAS!");
     }
 }

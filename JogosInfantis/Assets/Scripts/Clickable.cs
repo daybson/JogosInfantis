@@ -62,7 +62,7 @@ public class Clickable : MonoBehaviour
         else
             return;
 
-        isFade = click.Invoke(text.text.ToUpper());
+        isFade = click.Invoke(text.text);
 
         if (isFade)
         {
