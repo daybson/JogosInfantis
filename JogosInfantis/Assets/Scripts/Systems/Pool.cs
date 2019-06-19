@@ -20,6 +20,7 @@ public class Pool : MonoBehaviour
     private void Initialize()
     {
         var p = Instantiate(Resources.Load<GameObject>("Prefabs/" + ItemPrefabName));
+        p.transform.SetAsLastSibling();
         var ip0 = p.GetComponent<IPoolItem>();
         ip0.Disable();
         this.items.Add(ip0);
@@ -27,12 +28,11 @@ public class Pool : MonoBehaviour
         for (var i = 1; i < this.maxPoolItems; i++)
         {
             var obj = Instantiate(p);
+            obj.transform.SetAsLastSibling();
             var ip = obj.GetComponent<IPoolItem>();
             ip.Disable();
             this.items.Add(ip);
         }
-
-        //Destroy(p);
     }
 
     public IPoolItem RequestItem()

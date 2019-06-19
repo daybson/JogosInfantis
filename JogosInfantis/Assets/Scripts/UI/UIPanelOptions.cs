@@ -37,12 +37,13 @@ public class UIPanelOptions : MonoBehaviour
             GameSystem.Instance.LoadAudioPreference();
             AudioController.Instance.ChangeVolumeAllAudios(v);
         });
-              
+
     }
 
     private void Start()
     {
-        slider.value = GameSystem.Instance.Volume;        
+        slider.value = GameSystem.Instance.Volume;
+        toggle.isOn = GameSystem.Instance.Vibrate;
     }
 
 

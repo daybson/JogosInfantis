@@ -19,18 +19,17 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
     {
         AudioController.Instance.AddIngameAudio(AmbientMusic);
 
-
-        UIPanelLevelComplete.buttonBack.onClick.AddListener(() => SceneManager.LoadScene(SceneLoader.IndexMazeLevels));
-
+        UIPanelLevelComplete.buttonBack.onClick.AddListener(() => SceneManager.LoadScene(SceneLoader.MainScene));
 
         GameSystem.Instance.PlayGame += () =>
-       {
-           //AmbientMusic.Play();
-           UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.pause;
-       };
+        {
+            AmbientMusic.Play();
+            UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.pause;
+        };
+
         GameSystem.Instance.PauseGame += () =>
         {
-            //AmbientMusic.Pause();
+            AmbientMusic.Pause();
             UIIngameButtons.ButtonPausePlay.image.sprite = UIIngameButtons.play;
         };
 
@@ -60,13 +59,20 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
         //Panel Complete
         UIPanelLevelComplete.OnShow += () => BackgroundBlock.SetActive(true);
         UIPanelLevelComplete.OnClose += () => BackgroundBlock.SetActive(false);
+
+
+        UIPanelLevelComplete.buttonReplay.onClick.AddListener(() =>
+        {
+            UIPanelLevelComplete.buttonClose.onClick.Invoke();
+            GameSystem.Instance.IsRunning = true;
+            ScoreCounter.Instance.Reset();
+            Spawner.Instance.Init();
+        });
     }
 
 
     public void FinishLevel(bool status)
     {
-        print(ScoreCounter.Instance.Ratio);
-
         if (ScoreCounter.Instance.Ratio < 0.6f)
             UIPanelLevelComplete.Show("TENTE DE NOVO!", "ERROU MUITAS...");
 

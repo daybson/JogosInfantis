@@ -31,6 +31,8 @@ public class UIPanelLevelComplete : MonoBehaviour
             OnClose?.Invoke();
             gameObject.SetActive(false);
         });
+
+
     }
 
     public void Show(string title, string message)

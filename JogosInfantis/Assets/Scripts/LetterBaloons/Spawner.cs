@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Spawner : Singleton<Spawner>
 {
     public Pool pool;
 
@@ -36,27 +36,44 @@ public class Spawner : MonoBehaviour
 
     [Space()]
     public float waveSpeedBaloon;
+    public float currentWaveSpeedBaloon;
     public float increaseWaveSpeedPercentage;
     public float maxWave;
+
     [Space()]
     public float heightBaloon;
+    public float currentHeightBaloon;
     public float heightPercentage;
     public float maxHeight;
+
     [Space()]
     public float linearSpeedBaloon = 1f;
+    public float currentLinearSpeedBaloon = 1f;
     public float increaseLinearSpeedPercentage;
     public float maxLinear;
 
 
+    public void Init()
+    {
+        currentWaveSpeedBaloon = waveSpeedBaloon;
+        currentHeightBaloon = heightBaloon;
+        currentLinearSpeedBaloon = linearSpeedBaloon;
+        spawnTimer = spawnTimeStep + 1;
+        speedTimer = 0;
+        endgameTimer = 0;
+        running = true;
+    }
+
+
     private void Awake()
     {
+        Init();
+
         ScreenBoundsMin = GameSystem.Instance.MainCamera.ViewportToWorldPoint(Vector3.zero);
         ScreenBoundsMax = GameSystem.Instance.MainCamera.ViewportToWorldPoint(Vector3.one);
 
         ScreenBoundsMin += new Vector2(safeMarginX, safeMarginY);
         ScreenBoundsMax += new Vector2(-safeMarginX, -safeMarginY);
-
-        spawnTimer = spawnTimeStep + 1;
     }
 
 
@@ -96,9 +113,9 @@ public class Spawner : MonoBehaviour
     {
         this.spawnTimeStep -= this.spawnTimeStep * (inscreaseSpeedPercentage / 100);
 
-        this.linearSpeedBaloon *= 1f + increaseLinearSpeedPercentage / 100;
-        this.waveSpeedBaloon *= 2f + increaseWaveSpeedPercentage / 100;
-        this.heightBaloon *= 1f + heightPercentage / 100;
+        this.currentLinearSpeedBaloon *= 1f + increaseLinearSpeedPercentage / 100;
+        this.currentWaveSpeedBaloon *= 2f + increaseWaveSpeedPercentage / 100;
+        this.currentHeightBaloon *= 1f + heightPercentage / 100;
 
         if (linearSpeedBaloon > maxLinear)
             linearSpeedBaloon = maxLinear;
@@ -127,9 +144,9 @@ public class Spawner : MonoBehaviour
         {
             var wx = (WaveX)o;
             wx.text.text = this.matcher.GetNextWord();
-            wx.linearSpeed = this.linearSpeedBaloon;
-            wx.waveSpeed = this.waveSpeedBaloon;
-            wx.height = this.heightBaloon;
+            wx.linearSpeed = this.currentLinearSpeedBaloon;
+            wx.waveSpeed = this.currentWaveSpeedBaloon;
+            wx.height = this.currentHeightBaloon;
             o.Enable();
 
             if (Matcher.Instance.Check(wx.text.text))
