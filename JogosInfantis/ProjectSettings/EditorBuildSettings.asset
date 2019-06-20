@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/InitialMenu.unity
     guid: 1f8f706a08bb0c0489d46213adfa9e07
   - enabled: 1
-    path: Assets/Scenes/Levels/PickLettersBaloons.unity
+    path: Assets/Scenes/Levels/Baloons.unity
     guid: 89b5a4660465d734ab021005376f6244
   m_configObjects: {}

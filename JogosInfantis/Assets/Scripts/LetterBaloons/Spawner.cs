@@ -10,15 +10,6 @@ public class Spawner : Singleton<Spawner>
     public static Vector2 ScreenBoundsMin;
     public static Vector2 ScreenBoundsMax;
 
-    public float safeMarginX;
-    public float safeMarginY;
-
-    public GameObject obj;
-    public Matcher matcher;
-
-    private WaitForSeconds waitFor;
-
-    //public int SpawnCount;// { get; private set; } = 0;
 
     [Space()]
     public Image ClockFill;
@@ -52,6 +43,9 @@ public class Spawner : Singleton<Spawner>
     public float increaseLinearSpeedPercentage;
     public float maxLinear;
 
+    public Transform minMargin;
+    public Transform maxMargin;
+    public Transform disablePos;
 
     public void Init()
     {
@@ -68,12 +62,8 @@ public class Spawner : Singleton<Spawner>
     private void Awake()
     {
         Init();
-
-        ScreenBoundsMin = GameSystem.Instance.MainCamera.ViewportToWorldPoint(Vector3.zero);
-        ScreenBoundsMax = GameSystem.Instance.MainCamera.ViewportToWorldPoint(Vector3.one);
-
-        ScreenBoundsMin += new Vector2(safeMarginX, safeMarginY);
-        ScreenBoundsMax += new Vector2(-safeMarginX, -safeMarginY);
+        ScreenBoundsMin = minMargin.position;
+        ScreenBoundsMax = maxMargin.position;
     }
 
 
@@ -143,13 +133,18 @@ public class Spawner : Singleton<Spawner>
         if (o != null)
         {
             var wx = (WaveX)o;
-            wx.text.text = this.matcher.GetNextWord();
+            //wx.DisablePos = disablePos;
+
+            var word = Matcher.Instance.GetNextWord();
+
+            wx.GetComponentInChildren<Text>().text = word;
+
             wx.linearSpeed = this.currentLinearSpeedBaloon;
             wx.waveSpeed = this.currentWaveSpeedBaloon;
             wx.height = this.currentHeightBaloon;
             o.Enable();
 
-            if (Matcher.Instance.Check(wx.text.text))
+            if (Matcher.Instance.Check(word))
                 ScoreCounter.Instance.RightSpawnCount++;
             else
                 ScoreCounter.Instance.WrongSpawnCount++;

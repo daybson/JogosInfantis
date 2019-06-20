@@ -11,7 +11,7 @@ public class Pool : MonoBehaviour
     public List<IPoolItem> items = new List<IPoolItem>();
     public string ItemPrefabName;
 
-    private void Awake()
+    private void Start()
     {
         Initialize();
     }
