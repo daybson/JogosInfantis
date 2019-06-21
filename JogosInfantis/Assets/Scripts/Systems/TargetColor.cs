@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class TargetColor : MonoBehaviour
 {
-    Text Text;
+    public Text Text;
     public Color C { get; private set; }
     public bool Filled;
 

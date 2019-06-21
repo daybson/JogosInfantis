@@ -15,7 +15,10 @@ public class ColorName : MonoBehaviour
     {
         items = FindObjectsOfType<ItemColor>();
         targets = FindObjectsOfType<TargetColor>();
+    }
 
+    private void Start()
+    {
         SortRandomColorsAndNames();
     }
 
