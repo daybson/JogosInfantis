@@ -13,6 +13,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadScene(int i)
     {
+        AdsController.Instance.LoadAd();
+
         SceneManager.LoadScene(i);
     }
 
