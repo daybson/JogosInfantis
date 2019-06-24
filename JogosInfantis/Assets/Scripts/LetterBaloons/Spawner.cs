@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using System;
+using System.IO;
 
+[Serializable]
 public class Spawner : Singleton<Spawner>
 {
     public Pool pool;
@@ -46,13 +49,30 @@ public class Spawner : Singleton<Spawner>
     public Transform minMargin;
     public Transform maxMargin;
     public Transform disablePos;
+    public string LevelFolderName;
+
 
     public void Init()
     {
-        currentWaveSpeedBaloon = waveSpeedBaloon;
-        currentHeightBaloon = heightBaloon;
-        currentLinearSpeedBaloon = linearSpeedBaloon;
-        spawnTimer = spawnTimeStep + 1;
+         var s = this;
+
+        var j = JsonUtility.ToJson(this, true);
+
+        using (var sr = new StreamWriter("Assets/Resources/MatchLevels/" + LevelFolderName + "/JsonLevel.txt"))
+        {
+            sr.Write(j);
+        }
+
+
+        //var s = JsonUtility.FromJson<Spawner>("Assets/Resources/MatchLevels/" + LevelFolderName + "/InvalidWords.txt");
+
+
+        currentWaveSpeedBaloon = s.waveSpeedBaloon;
+        currentHeightBaloon = s.heightBaloon;
+        currentLinearSpeedBaloon = s.linearSpeedBaloon;
+
+
+        spawnTimer = s.spawnTimeStep + 1;
         speedTimer = 0;
         endgameTimer = 0;
         running = true;

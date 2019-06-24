@@ -3682,6 +3682,7 @@ MonoBehaviour:
   minMargin: {fileID: 363433401}
   maxMargin: {fileID: 1495675456}
   disablePos: {fileID: 0}
+  LevelFolderName: VogalsLowerCase
 --- !u!4 &2087436923
 Transform:
   m_ObjectHideFlags: 0

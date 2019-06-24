@@ -17,6 +17,7 @@ public class Matcher : Singleton<Matcher>
 
     public string LevelFolderName;
 
+
     private void Start()
     {
         using (var sr = new StreamReader("Assets/Resources/MatchLevels/" + LevelFolderName + "/InvalidWords.txt"))
@@ -37,6 +38,7 @@ public class Matcher : Singleton<Matcher>
                 this.validWords.Add(sr.ReadLine());
             }
         }
+
 
         using (var sr = new StreamReader("Assets/Resources/MatchLevels/" + LevelFolderName + "/Description.txt", System.Text.Encoding.Default, true))
         {

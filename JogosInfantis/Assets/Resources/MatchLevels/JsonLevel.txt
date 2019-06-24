@@ -1,0 +1,35 @@
+{
+    "pool": {
+        "instanceID": 36420
+    },
+    "ClockFill": {
+        "instanceID": 36342
+    },
+    "finiteGame": true,
+    "spawnTimeStep": 2.5,
+    "levelDuration": 120.0,
+    "increaseSpeedTimeStep": 20,
+    "inscreaseSpeedPercentage": 10.0,
+    "waveSpeedBaloon": 2.0,
+    "currentWaveSpeedBaloon": 0.0,
+    "increaseWaveSpeedPercentage": 10.0,
+    "maxWave": 3.5,
+    "heightBaloon": 0.30000001192092898,
+    "currentHeightBaloon": 0.0,
+    "heightPercentage": 10.0,
+    "maxHeight": 0.6000000238418579,
+    "linearSpeedBaloon": 1.0,
+    "currentLinearSpeedBaloon": 1.0,
+    "increaseLinearSpeedPercentage": 10.0,
+    "maxLinear": 3.0,
+    "minMargin": {
+        "instanceID": 36332
+    },
+    "maxMargin": {
+        "instanceID": 36416
+    },
+    "disablePos": {
+        "instanceID": 36356
+    },
+    "LevelFolderName": ""
+}

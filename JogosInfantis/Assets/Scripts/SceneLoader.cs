@@ -11,6 +11,11 @@ public class SceneLoader : MonoBehaviour
     public static int IndexMazeLevels;
     internal static int MainScene = 0;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void LoadScene(int i)
     {
         AdsController.Instance.LoadAd();

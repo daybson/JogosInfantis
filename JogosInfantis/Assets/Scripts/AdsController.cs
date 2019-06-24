@@ -7,7 +7,9 @@ public class AdsController : Singleton<AdsController>
 {
     private void Awake()
     {
-        Advertisement.Initialize("", true);
+        DontDestroyOnLoad(gameObject);
+
+        Advertisement.Initialize("a", true);
     }
 
     internal void LoadAd()
