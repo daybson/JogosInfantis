@@ -393,6 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7757d2f7770054548b2d79e8e44f3040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  remains: []
+  Clicks: 0
 --- !u!4 &253339314
 Transform:
   m_ObjectHideFlags: 0
@@ -2006,7 +2008,7 @@ PrefabInstance:
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 98
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
@@ -2036,7 +2038,7 @@ PrefabInstance:
     - target: {fileID: 8063683340932366374, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 298
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8063683340932366374, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
