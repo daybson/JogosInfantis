@@ -13,66 +13,39 @@ public class Spawner : Singleton<Spawner>
     public static Vector2 ScreenBoundsMin;
     public static Vector2 ScreenBoundsMax;
 
-
     [Space()]
     public Image ClockFill;
-    public bool finiteGame;
-    public float spawnTimeStep;
-    public float levelDuration = 0f;
-    public int increaseSpeedTimeStep = 30;
-    public float inscreaseSpeedPercentage;
-
 
     private float spawnTimer = 0;
     private float speedTimer = 0;
     private float endgameTimer = 0;
     private bool running = true;
 
-    [Space()]
-    public float waveSpeedBaloon;
-    public float currentWaveSpeedBaloon;
-    public float increaseWaveSpeedPercentage;
-    public float maxWave;
-
-    [Space()]
-    public float heightBaloon;
-    public float currentHeightBaloon;
-    public float heightPercentage;
-    public float maxHeight;
-
-    [Space()]
-    public float linearSpeedBaloon = 1f;
-    public float currentLinearSpeedBaloon = 1f;
-    public float increaseLinearSpeedPercentage;
-    public float maxLinear;
-
     public Transform minMargin;
     public Transform maxMargin;
     public Transform disablePos;
     public string LevelFolderName;
 
+    public LetterLevel Level;
 
     public void Init()
     {
-         var s = this;
-
-        var j = JsonUtility.ToJson(this, true);
-
+        /*
+        var j = JsonUtility.ToJson(new LetterLevel(), true);
         using (var sr = new StreamWriter("Assets/Resources/MatchLevels/" + LevelFolderName + "/JsonLevel.txt"))
         {
             sr.Write(j);
         }
+        */
 
+        var content = File.ReadAllText("Assets/Resources/MatchLevels/" + LevelFolderName + "/JsonLevel.txt");
+        Level = JsonUtility.FromJson<LetterLevel>(content);
+        Level.currentWaveSpeedBaloon = Level.waveSpeedBaloon;
+        Level.currentHeightBaloon = Level.heightBaloon;
+        Level.currentLinearSpeedBaloon = Level.linearSpeedBaloon;
 
-        //var s = JsonUtility.FromJson<Spawner>("Assets/Resources/MatchLevels/" + LevelFolderName + "/InvalidWords.txt");
+        spawnTimer = Level.spawnTimeStep + 1;
 
-
-        currentWaveSpeedBaloon = s.waveSpeedBaloon;
-        currentHeightBaloon = s.heightBaloon;
-        currentLinearSpeedBaloon = s.linearSpeedBaloon;
-
-
-        spawnTimer = s.spawnTimeStep + 1;
         speedTimer = 0;
         endgameTimer = 0;
         running = true;
@@ -96,22 +69,22 @@ public class Spawner : Singleton<Spawner>
         speedTimer += Time.deltaTime;
 
 
-        if (finiteGame)
+        if (Level.finiteGame)
         {
             endgameTimer += Time.deltaTime;
 
-            ClockFill.fillAmount = endgameTimer / levelDuration;
-            if (endgameTimer > levelDuration)
+            ClockFill.fillAmount = endgameTimer / Level.levelDuration;
+            if (endgameTimer > Level.levelDuration)
                 FinishLevel();
         }
 
-        if (spawnTimer > spawnTimeStep)
+        if (spawnTimer > Level.spawnTimeStep)
         {
             DoSpawn();
             spawnTimer = 0;
         }
 
-        if (speedTimer > increaseSpeedTimeStep)
+        if (speedTimer > Level.increaseSpeedTimeStep)
         {
             IncreaseSpeed();
             speedTimer = 0;
@@ -121,20 +94,20 @@ public class Spawner : Singleton<Spawner>
 
     private void IncreaseSpeed()
     {
-        this.spawnTimeStep -= this.spawnTimeStep * (inscreaseSpeedPercentage / 100);
+        Level.spawnTimeStep -= Level.spawnTimeStep * (Level.inscreaseSpeedPercentage / 100);
 
-        this.currentLinearSpeedBaloon *= 1f + increaseLinearSpeedPercentage / 100;
-        this.currentWaveSpeedBaloon *= 1f + increaseWaveSpeedPercentage / 100;
-        this.currentHeightBaloon *= 1f + heightPercentage / 100;
+        Level.currentLinearSpeedBaloon *= 1f + Level.increaseLinearSpeedPercentage / 100;
+        Level.currentWaveSpeedBaloon *= 1f + Level.increaseWaveSpeedPercentage / 100;
+        Level.currentHeightBaloon *= 1f + Level.heightPercentage / 100;
 
-        if (linearSpeedBaloon > maxLinear)
-            linearSpeedBaloon = maxLinear;
+        if (Level.linearSpeedBaloon > Level.maxLinear)
+            Level.linearSpeedBaloon = Level.maxLinear;
 
-        if (waveSpeedBaloon > maxWave)
-            waveSpeedBaloon = maxWave;
+        if (Level.waveSpeedBaloon > Level.maxWave)
+            Level.waveSpeedBaloon = Level.maxWave;
 
-        if (heightBaloon > maxHeight)
-            heightBaloon = maxHeight;
+        if (Level.heightBaloon > Level.maxHeight)
+            Level.heightBaloon = Level.maxHeight;
     }
 
 
@@ -153,15 +126,11 @@ public class Spawner : Singleton<Spawner>
         if (o != null)
         {
             var wx = (WaveX)o;
-            //wx.DisablePos = disablePos;
-
             var word = Matcher.Instance.GetNextWord();
-
             wx.GetComponentInChildren<Text>().text = word;
-
-            wx.linearSpeed = this.currentLinearSpeedBaloon;
-            wx.waveSpeed = this.currentWaveSpeedBaloon;
-            wx.height = this.currentHeightBaloon;
+            wx.linearSpeed = Level.currentLinearSpeedBaloon;
+            wx.waveSpeed = Level.currentWaveSpeedBaloon;
+            wx.height = Level.currentHeightBaloon;
             o.Enable();
 
             if (Matcher.Instance.Check(word))

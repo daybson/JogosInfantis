@@ -1,14 +1,8 @@
 {
-    "pool": {
-        "instanceID": 35676
-    },
-    "ClockFill": {
-        "instanceID": 35702
-    },
     "finiteGame": true,
     "spawnTimeStep": 2.5,
     "levelDuration": 120.0,
-    "increaseSpeedTimeStep": 20,
+    "increaseSpeedTimeStep": 20.0,
     "inscreaseSpeedPercentage": 10.0,
     "waveSpeedBaloon": 2.0,
     "currentWaveSpeedBaloon": 0.0,
@@ -21,15 +15,5 @@
     "linearSpeedBaloon": 1.0,
     "currentLinearSpeedBaloon": 1.0,
     "increaseLinearSpeedPercentage": 10.0,
-    "maxLinear": 3.0,
-    "minMargin": {
-        "instanceID": 35658
-    },
-    "maxMargin": {
-        "instanceID": 35812
-    },
-    "disablePos": {
-        "instanceID": 0
-    },
-    "LevelFolderName": "VogalsLowerCase"
+    "maxLinear": 3.0
 }
