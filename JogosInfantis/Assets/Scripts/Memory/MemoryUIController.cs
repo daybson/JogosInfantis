@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-public class BaloonsUIController : Singleton<BaloonsUIController>
+public class MemoryUIController : Singleton<MemoryUIController>
 {
     public UIPanelLevelComplete UIPanelLevelComplete;
     public UIIngameButtons UIIngameButtons;
     public UIPanelYesNo UIPanelYesNo;
     public UIPanelOptions UIPanelOptions;
-    //public AudioMixer mixer;
     public AudioSource AmbientMusic;
     public GameObject BackgroundBlock;
 
@@ -65,21 +64,12 @@ public class BaloonsUIController : Singleton<BaloonsUIController>
         {
             UIPanelLevelComplete.buttonClose.onClick.Invoke();
             GameSystem.Instance.IsRunning = true;
-            ScoreCounter.Instance.Reset();
-            Spawner.Instance.Init();
         });
     }
 
 
     public void FinishLevel()
     {
-        if (ScoreCounter.Instance.Ratio < 0.6f)
-            UIPanelLevelComplete.Show("TENTE DE NOVO!", "ERROU MUITAS LETRAS...");
-
-        else if (ScoreCounter.Instance.Ratio >= 0.6f && ScoreCounter.Instance.Ratio < 1f)
-            UIPanelLevelComplete.Show("MUITO BEM!", "ACERTOU QUASE TODAS AS LETRAS!");
-
-        else if (ScoreCounter.Instance.Ratio == 1f)
-            UIPanelLevelComplete.Show("PERFEITO!", "ACERTOU TODAS AS LETRAS!");
+        UIPanelLevelComplete.Show("PARABÉNS", "ACERTOU TODAS AS FIGURAS!");
     }
 }

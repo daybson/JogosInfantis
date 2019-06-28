@@ -6,7 +6,6 @@ using System.Linq;
 public class CardChecker : Singleton<CardChecker>
 {
     private List<Card> pair = new List<Card>();
-    public List<Card> remains = new List<Card>();
 
     public int Clicks;
 
@@ -21,7 +20,7 @@ public class CardChecker : Singleton<CardChecker>
 
 
             if (pair[0].Id == pair[1].Id)
-                Match();
+                StartCoroutine(Match());
             else
                 RemovePair();
         }
@@ -37,15 +36,11 @@ public class CardChecker : Singleton<CardChecker>
         }
 
         Clicks = 0;
-
-        remains.ForEach(c => c.enabled = true);
-
-        remains.Clear();
         pair.Clear();
     }
 
 
-    public void Match()
+    public IEnumerator Match()
     {
         foreach (var c in pair)
         {
@@ -54,6 +49,19 @@ public class CardChecker : Singleton<CardChecker>
         }
 
         Clicks = 0;
-        print("MATCH!!");
+
+        if (CheckGameOver())
+        {
+            yield return new WaitForSeconds(3);
+            MemoryUIController.Instance.FinishLevel();
+        }
+
+        yield return null;
+    }
+
+
+    private bool CheckGameOver()
+    {
+        return FindObjectsOfType<Card>().Where(c => c.Checked == false).ToList().Count <= 0;
     }
 }

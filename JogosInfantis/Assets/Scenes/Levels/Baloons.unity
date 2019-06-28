@@ -3662,27 +3662,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pool: {fileID: 469592171}
   ClockFill: {fileID: 736609028}
-  finiteGame: 1
-  spawnTimeStep: 2.5
-  levelDuration: 120
-  increaseSpeedTimeStep: 20
-  inscreaseSpeedPercentage: 10
-  waveSpeedBaloon: 2
-  currentWaveSpeedBaloon: 0
-  increaseWaveSpeedPercentage: 10
-  maxWave: 3.5
-  heightBaloon: 0.3
-  currentHeightBaloon: 0
-  heightPercentage: 10
-  maxHeight: 0.6
-  linearSpeedBaloon: 1
-  currentLinearSpeedBaloon: 1
-  increaseLinearSpeedPercentage: 10
-  maxLinear: 3
   minMargin: {fileID: 363433401}
   maxMargin: {fileID: 1495675456}
   disablePos: {fileID: 0}
   LevelFolderName: VogalsLowerCase
+  Level:
+    finiteGame: 1
+    spawnTimeStep: 2.5
+    levelDuration: 120
+    increaseSpeedTimeStep: 20
+    inscreaseSpeedPercentage: 10
+    waveSpeedBaloon: 2
+    currentWaveSpeedBaloon: 0
+    increaseWaveSpeedPercentage: 10
+    maxWave: 3.5
+    heightBaloon: 0.3
+    currentHeightBaloon: 0
+    heightPercentage: 10
+    maxHeight: 0.6
+    linearSpeedBaloon: 1
+    currentLinearSpeedBaloon: 1
+    increaseLinearSpeedPercentage: 10
+    maxLinear: 3
 --- !u!4 &2087436923
 Transform:
   m_ObjectHideFlags: 0

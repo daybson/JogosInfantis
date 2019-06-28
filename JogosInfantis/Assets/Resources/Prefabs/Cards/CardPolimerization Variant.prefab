@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 2963987443970546569, guid: 7fe9b476893c3f841b20cf3521f0fe21,
         type: 3}
       propertyPath: m_Name
-      value: CardPolimerization Variant
+      value: CardPolimerization Variant (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2963987443970546564, guid: 7fe9b476893c3f841b20cf3521f0fe21,
         type: 3}
@@ -20,7 +20,7 @@ PrefabInstance:
     - target: {fileID: 2963987443970546564, guid: 7fe9b476893c3f841b20cf3521f0fe21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2963987443970546564, guid: 7fe9b476893c3f841b20cf3521f0fe21,
         type: 3}

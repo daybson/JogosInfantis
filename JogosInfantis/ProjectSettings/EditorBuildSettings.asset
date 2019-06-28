@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Fishing.unity
     guid: e3af9dbc5d16f6b44b9c29650ee9ca42
+  - enabled: 1
+    path: Assets/Scenes/Levels/Memory.unity
+    guid: 0c1acae565461b34e90795912ad47773
   m_configObjects: {}
