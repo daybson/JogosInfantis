@@ -56,7 +56,6 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     public void Flop()
     {
-        print("FLOP");
         animator.SetBool("flip", false);
     }
 

@@ -63,15 +63,15 @@ public class CardChecker : Singleton<CardChecker>
 
         pair.Clear();
 
-        StartCoroutine(CheckGameOver());
+        CheckGameOver();
     }
 
 
-    private IEnumerator CheckGameOver()
+    private void CheckGameOver()
     {
-        if (FindObjectsOfType<Card>().Where(c => c.Checked == false).ToList().Count <= 0)
+        //if (cards.Where(c => c.Checked == false).ToList().Count <= 0)
+        if (cards.Count == 0)
         {
-            yield return new WaitForSeconds(1);
             MemoryUIController.Instance.FinishLevel();
         }
     }

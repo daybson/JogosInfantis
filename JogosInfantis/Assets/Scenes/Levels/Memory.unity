@@ -640,6 +640,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card
       objectReference: {fileID: 0}
+    - target: {fileID: 1379875379350384525, guid: 339f4485d16483c4ca102d4ff89f405a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6282638851202720924, guid: 339f4485d16483c4ca102d4ff89f405a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -744,11 +749,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -614712930224039463, guid: 339f4485d16483c4ca102d4ff89f405a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 339f4485d16483c4ca102d4ff89f405a, type: 3}
