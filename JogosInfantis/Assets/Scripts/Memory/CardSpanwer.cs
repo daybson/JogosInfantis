@@ -22,6 +22,7 @@ public class CardSpanwer : MonoBehaviour
 
         grids[level].SetActive(true);
 
+
         switch (level)
         {
             case 0: SelectCards(2); break;

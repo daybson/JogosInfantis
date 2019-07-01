@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   Checked: 0
+  TempCheck: 0
   draw: {fileID: 0}
   backface: {fileID: 21300000, guid: e7c5a8a129243d44da763b2afdca4a48, type: 3}
   spriteRenderer: {fileID: 7878573134367702263}
@@ -70,9 +71,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ee7d05b1b67ebdd48bc320eba3185c14, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_CullingMode: 1
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
