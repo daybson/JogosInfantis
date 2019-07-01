@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IPointerDownHandler
 {
     public int Id;
     public bool Checked;
     public Sprite draw;
     public Sprite backface;
-    public SpriteRenderer spriteRenderer;
+    public Image spriteRenderer;
     public Animator animator;
     public float secondsToFlop;
 
@@ -18,6 +20,7 @@ public class Card : MonoBehaviour
         spriteRenderer.sprite = backface;
     }
 
+    public void OnPointerDown(PointerEventData eventData) => OnMouseDown();
 
     private void OnMouseDown()
     {
@@ -58,4 +61,6 @@ public class Card : MonoBehaviour
         else
             spriteRenderer.sprite = backface;
     }
+
+    
 }

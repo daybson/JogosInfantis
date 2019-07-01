@@ -5,7 +5,7 @@ using System.Linq;
 
 public class CardChecker : Singleton<CardChecker>
 {
-    private List<Card> pair = new List<Card>();
+    public List<Card> pair = new List<Card>();
 
     public int Clicks;
 
@@ -52,7 +52,7 @@ public class CardChecker : Singleton<CardChecker>
 
         if (CheckGameOver())
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1);
             MemoryUIController.Instance.FinishLevel();
         }
 

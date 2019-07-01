@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Events;
+
+public delegate void ShuffleCards (int level);
 
 public class UIIncrementalLevels : MonoBehaviour
 {
@@ -13,9 +16,12 @@ public class UIIncrementalLevels : MonoBehaviour
     public Sprite deselected;
     public int level = 0;
 
+    public ShuffleCards OnIncrease;
+    public ShuffleCards OnDecrease;
+
     private void Awake()
     {
-        indicators = GetComponentsInChildren<Image>().ToList();
+        //indicators = GetComponentsInChildren<Image>().ToList();
 
         ButtonDec.onClick.AddListener(() =>
         {
@@ -24,6 +30,7 @@ public class UIIncrementalLevels : MonoBehaviour
                 level--;
                 UpdateIndicator(level, deselected);
             }
+            OnDecrease?.Invoke(level);
         });
 
         ButtonInc.onClick.AddListener(() =>
@@ -33,7 +40,8 @@ public class UIIncrementalLevels : MonoBehaviour
                 UpdateIndicator(level, selected);
                 level++;
             }
-        });
+            OnIncrease?.Invoke(level);
+        });       
     }
 
     private void UpdateIndicator(int i, Sprite image)

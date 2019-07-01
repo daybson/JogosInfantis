@@ -12,7 +12,8 @@ public class MemoryUIController : Singleton<MemoryUIController>
     public UIPanelOptions UIPanelOptions;
     public AudioSource AmbientMusic;
     public GameObject BackgroundBlock;
-
+    public UIIncrementalLevels UIIncrementalLevels;
+    public CardSpanwer CardSpanwer;
 
     protected void Awake()
     {
@@ -65,6 +66,12 @@ public class MemoryUIController : Singleton<MemoryUIController>
             UIPanelLevelComplete.buttonClose.onClick.Invoke();
             GameSystem.Instance.IsRunning = true;
         });
+
+
+        UIIncrementalLevels.OnIncrease += (l) => this.CardSpanwer.ShowCardsGrid(UIIncrementalLevels.level);
+        UIIncrementalLevels.OnDecrease += (l) => this.CardSpanwer.ShowCardsGrid(UIIncrementalLevels.level);
+
+        UIIncrementalLevels.ButtonInc.onClick.Invoke();
     }
 
 
