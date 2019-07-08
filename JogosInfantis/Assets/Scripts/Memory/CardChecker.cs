@@ -14,10 +14,14 @@ public class CardChecker : Singleton<CardChecker>
 
     private void Start()
     {
-        cards = FindObjectsOfType<Card>().ToList();
+        Init();        
     }
 
-
+    public void Init()
+    {
+        cards = FindObjectsOfType<Card>().ToList();
+        pair = new List<Card>();
+    }
 
     public void SetPair(Card card)
     {

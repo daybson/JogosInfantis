@@ -6,9 +6,7 @@ using System.Linq;
 public class CardSpanwer : MonoBehaviour
 {
     public List<GameObject> cardsPrefabs;
-
     public int currentLevel;
-
     public List<GameObject> grids;
 
 
@@ -16,7 +14,7 @@ public class CardSpanwer : MonoBehaviour
     {
         DeactivateChildren();
 
-        grids[0].SetActive(false);
+        //grids[0].SetActive(false);
         grids[0].GetComponent<GridLayoutGroup>().constraintCount = level + 2;
         currentLevel = level;
 
@@ -31,10 +29,13 @@ public class CardSpanwer : MonoBehaviour
             case 1:
                 SelectCards(3);
                 break;
+            case 2:
+                SelectCards(5);
+                break;
         }
 
 
-        for (int i = 0; i < grids[level].transform.childCount; i++)
+        for (int i = 0; i < grids[0].transform.childCount; i++)
         {
             var x = Random.Range(0, grids[0].transform.childCount);
             var y = Random.Range(0, grids[0].transform.childCount);
@@ -47,8 +48,6 @@ public class CardSpanwer : MonoBehaviour
             grids[0].transform.GetChild(i).SetSiblingIndex(y);
             grids[0].transform.GetChild(y).SetSiblingIndex(x);
         }
-
-
     }
 
 
@@ -63,10 +62,7 @@ public class CardSpanwer : MonoBehaviour
 
     private void SelectCards(int uniqueCardsCount)
     {
-
-
         var selected = new List<int>();
-
 
         for (int i = 0; i < uniqueCardsCount; i++)
         {

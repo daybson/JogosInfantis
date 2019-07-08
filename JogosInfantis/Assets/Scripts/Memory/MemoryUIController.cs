@@ -14,6 +14,7 @@ public class MemoryUIController : Singleton<MemoryUIController>
     public GameObject BackgroundBlock;
     public UIIncrementalLevels UIIncrementalLevels;
     public CardSpanwer CardSpanwer;
+    public CardChecker CardChecker;
 
     protected void Awake()
     {
@@ -64,7 +65,10 @@ public class MemoryUIController : Singleton<MemoryUIController>
         UIPanelLevelComplete.buttonReplay.onClick.AddListener(() =>
         {
             UIPanelLevelComplete.buttonClose.onClick.Invoke();
+            this.CardSpanwer.ShowCardsGrid(UIIncrementalLevels.level);
+            CardChecker.Init();
             GameSystem.Instance.IsRunning = true;
+
         });
 
 
