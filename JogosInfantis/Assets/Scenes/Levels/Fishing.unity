@@ -1074,7 +1074,7 @@ PrefabInstance:
     - target: {fileID: 648042465908196343, guid: 7f104b14acc5b6e47bee57e7acc102f0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 648042465908196343, guid: 7f104b14acc5b6e47bee57e7acc102f0,
         type: 3}
@@ -2423,32 +2423,32 @@ PrefabInstance:
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -98
       objectReference: {fileID: 0}
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 196
       objectReference: {fileID: 0}
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 196
       objectReference: {fileID: 0}
     - target: {fileID: 8063683340932366374, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 298
+      value: 98
       objectReference: {fileID: 0}
     - target: {fileID: 8063683340932366374, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
@@ -2508,6 +2508,11 @@ PrefabInstance:
     - target: {fileID: 8063683340782335548, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8063683338990639604, guid: 65ecd94db685c5248909ade91882e631,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -2629,9 +2634,9 @@ RectTransform:
   - {fileID: 1187440947}
   - {fileID: 822898029}
   - {fileID: 836440277}
+  - {fileID: 1995162523}
   - {fileID: 516063911}
   - {fileID: 1523004634}
-  - {fileID: 1995162523}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2656,7 +2661,6 @@ MonoBehaviour:
   UIIngameButtons: {fileID: 1187440948}
   UIPanelYesNo: {fileID: 516063912}
   UIPanelOptions: {fileID: 836440281}
-  mixer: {fileID: 24100000, guid: c34878654d7634b4191e7cc390fe479c, type: 2}
   AmbientMusic: {fileID: 76267698}
   BackgroundBlock: {fileID: 822898028}
 --- !u!114 &1401772639
@@ -8217,26 +8221,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pool: {fileID: 941630074}
   ClockFill: {fileID: 488455323}
-  finiteGame: 1
-  spawnTimeStep: 2.5
-  levelDuration: 120
-  increaseSpeedTimeStep: 20
-  inscreaseSpeedPercentage: 10
-  waveSpeedBaloon: 2
-  currentWaveSpeedBaloon: 0
-  increaseWaveSpeedPercentage: 10
-  maxWave: 3.5
-  heightBaloon: 0.3
-  currentHeightBaloon: 0
-  heightPercentage: 10
-  maxHeight: 0.6
-  linearSpeedBaloon: 1
-  currentLinearSpeedBaloon: 1
-  increaseLinearSpeedPercentage: 10
-  maxLinear: 3
   minMargin: {fileID: 228430426}
   maxMargin: {fileID: 918573841}
   disablePos: {fileID: 576029851}
+  LevelFolderName: 
+  Level:
+    finiteGame: 0
+    spawnTimeStep: 0
+    levelDuration: 0
+    increaseSpeedTimeStep: 0
+    inscreaseSpeedPercentage: 0
+    waveSpeedBaloon: 0
+    currentWaveSpeedBaloon: 0
+    increaseWaveSpeedPercentage: 0
+    maxWave: 0
+    heightBaloon: 0
+    currentHeightBaloon: 0
+    heightPercentage: 0
+    maxHeight: 0
+    linearSpeedBaloon: 0
+    currentLinearSpeedBaloon: 0
+    increaseLinearSpeedPercentage: 0
+    maxLinear: 0
 --- !u!4 &1987320487
 Transform:
   m_ObjectHideFlags: 0
@@ -8284,7 +8290,7 @@ RectTransform:
   - {fileID: 2144459720}
   - {fileID: 488455325}
   m_Father: {fileID: 1401772637}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}

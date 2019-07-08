@@ -16,32 +16,36 @@ public class CardSpanwer : MonoBehaviour
     {
         DeactivateChildren();
 
-        grids[currentLevel].SetActive(false);
-
+        grids[0].SetActive(false);
+        grids[0].GetComponent<GridLayoutGroup>().constraintCount = level + 2;
         currentLevel = level;
 
-        grids[level].SetActive(true);
+        grids[0].SetActive(true);
 
 
         switch (level)
         {
-            case 0: SelectCards(2); break;
-            case 1: SelectCards(3); break;
+            case 0:
+                SelectCards(2);
+                break;
+            case 1:
+                SelectCards(3);
+                break;
         }
 
 
         for (int i = 0; i < grids[level].transform.childCount; i++)
         {
-            var x = Random.Range(0, grids[level].transform.childCount);
-            var y = Random.Range(0, grids[level].transform.childCount);
+            var x = Random.Range(0, grids[0].transform.childCount);
+            var y = Random.Range(0, grids[0].transform.childCount);
 
             while (x == y)
             {
-                y = Random.Range(0, grids[level].transform.childCount);
+                y = Random.Range(0, grids[0].transform.childCount);
             }
 
-            grids[level].transform.GetChild(i).SetSiblingIndex(y);
-            grids[level].transform.GetChild(y).SetSiblingIndex(x);
+            grids[0].transform.GetChild(i).SetSiblingIndex(y);
+            grids[0].transform.GetChild(y).SetSiblingIndex(x);
         }
 
 
@@ -82,8 +86,8 @@ public class CardSpanwer : MonoBehaviour
             var c1 = Instantiate(cardsPrefabs[c]);
             var c2 = Instantiate(cardsPrefabs[c]);
 
-            c1.transform.SetParent(grids[currentLevel].transform);
-            c2.transform.SetParent(grids[currentLevel].transform);
+            c1.transform.SetParent(grids[0].transform);
+            c2.transform.SetParent(grids[0].transform);
 
             c1.transform.localScale = Vector3.one;
             c2.transform.localScale = Vector3.one;

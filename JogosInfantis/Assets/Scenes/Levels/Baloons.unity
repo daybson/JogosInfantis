@@ -499,7 +499,6 @@ MonoBehaviour:
   UIIngameButtons: {fileID: 321747750}
   UIPanelYesNo: {fileID: 1637692182}
   UIPanelOptions: {fileID: 1025304658}
-  mixer: {fileID: 24100000, guid: c34878654d7634b4191e7cc390fe479c, type: 2}
   AmbientMusic: {fileID: 66907444}
   BackgroundBlock: {fileID: 2144106362}
 --- !u!1 &469592170
@@ -1125,27 +1124,27 @@ PrefabInstance:
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -98
       objectReference: {fileID: 0}
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 196
       objectReference: {fileID: 0}
     - target: {fileID: 8063683338990639607, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 196
       objectReference: {fileID: 0}
     - target: {fileID: 8063683340932366374, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
@@ -1206,6 +1205,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PreferredHeight
       value: 196
+      objectReference: {fileID: 0}
+    - target: {fileID: 8063683338990639604, guid: 65ecd94db685c5248909ade91882e631,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65ecd94db685c5248909ade91882e631, type: 3}
