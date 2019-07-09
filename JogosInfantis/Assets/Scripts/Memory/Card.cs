@@ -31,7 +31,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
         if (CardChecker.Instance.Clicks >= 2 ||
             Checked == true ||
             TempCheck == true ||
-            CardChecker.Instance.cards.Where(c => c.TempCheck == true).ToList().Count == 2)
+            FindObjectsOfType<Card>().Where(c => c.TempCheck == true).ToList().Count == 2)
             return;
 
         TempCheck = true;

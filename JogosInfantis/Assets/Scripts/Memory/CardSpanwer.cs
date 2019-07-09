@@ -7,47 +7,58 @@ public class CardSpanwer : MonoBehaviour
 {
     public List<GameObject> cardsPrefabs;
     public int currentLevel;
-    public List<GameObject> grids;
+    public GameObject grid;
 
 
     public void ShowCardsGrid(int level)
     {
-        DeactivateChildren();
-
-        //grids[0].SetActive(false);
-        grids[0].GetComponent<GridLayoutGroup>().constraintCount = level + 2;
+        DeactivateChildren(); 
         currentLevel = level;
-
-        grids[0].SetActive(true);
-
 
         switch (level)
         {
             case 0:
-                SelectCards(2);
-                break;
-            case 1:
+                grid.GetComponent<GridLayoutGroup>().constraintCount = 3;
                 SelectCards(3);
                 break;
+            case 1:
+                grid.GetComponent<GridLayoutGroup>().constraintCount = 4;
+                SelectCards(4);
+                break;
             case 2:
+                grid.GetComponent<GridLayoutGroup>().constraintCount = 5;
                 SelectCards(5);
+                break;
+            case 3:
+                grid.GetComponent<GridLayoutGroup>().constraintCount = 5;
+                SelectCards(6);
+                break;
+            case 4:
+                grid.GetComponent<GridLayoutGroup>().constraintCount = 5;
+                SelectCards(7);
+                break;
+            case 5:
+                grid.GetComponent<GridLayoutGroup>().constraintCount = 5;
+                SelectCards(8);
                 break;
         }
 
 
-        for (int i = 0; i < grids[0].transform.childCount; i++)
+        for (int i = 0; i < grid.transform.childCount; i++)
         {
-            var x = Random.Range(0, grids[0].transform.childCount);
-            var y = Random.Range(0, grids[0].transform.childCount);
+            var x = Random.Range(0, grid.transform.childCount);
+            var y = Random.Range(0, grid.transform.childCount);
 
             while (x == y)
             {
-                y = Random.Range(0, grids[0].transform.childCount);
+                y = Random.Range(0, grid.transform.childCount);
             }
 
-            grids[0].transform.GetChild(i).SetSiblingIndex(y);
-            grids[0].transform.GetChild(y).SetSiblingIndex(x);
+            grid.transform.GetChild(i).SetSiblingIndex(y);
+            grid.transform.GetChild(y).SetSiblingIndex(x);
         }
+
+        CardChecker.Instance.Init();
     }
 
 
@@ -82,8 +93,8 @@ public class CardSpanwer : MonoBehaviour
             var c1 = Instantiate(cardsPrefabs[c]);
             var c2 = Instantiate(cardsPrefabs[c]);
 
-            c1.transform.SetParent(grids[0].transform);
-            c2.transform.SetParent(grids[0].transform);
+            c1.transform.SetParent(grid.transform);
+            c2.transform.SetParent(grid.transform);
 
             c1.transform.localScale = Vector3.one;
             c2.transform.localScale = Vector3.one;

@@ -11,16 +11,17 @@ public class CardChecker : Singleton<CardChecker>
 
     public int Clicks;
 
-
+    /*
     private void Start()
     {
-        Init();        
-    }
+        Init();
+    }*/
 
     public void Init()
     {
         cards = FindObjectsOfType<Card>().ToList();
         pair = new List<Card>();
+        Clicks = 0;
     }
 
     public void SetPair(Card card)
@@ -45,6 +46,8 @@ public class CardChecker : Singleton<CardChecker>
 
     public void RemovePair()
     {
+        AudioController.Instance.IngameAudios[1].Play();
+
         pair[0].Flop();
         pair[1].Flop();
 
@@ -56,6 +59,8 @@ public class CardChecker : Singleton<CardChecker>
 
     public void Match()
     {
+        AudioController.Instance.IngameAudios[0].Play();
+
         cards.Remove(pair[0]);
         cards.Remove(pair[1]);
 
@@ -73,9 +78,10 @@ public class CardChecker : Singleton<CardChecker>
 
     private void CheckGameOver()
     {
-        //if (cards.Where(c => c.Checked == false).ToList().Count <= 0)
-        if (cards.Count == 0)
+        if (FindObjectsOfType<Card>().Where(c => c.Checked == false).ToList().Count <= 0)
         {
+            AudioController.Instance.IngameAudios[2].Play();
+
             MemoryUIController.Instance.FinishLevel();
         }
     }
