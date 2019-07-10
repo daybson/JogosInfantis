@@ -26,14 +26,14 @@ public class GameSystem : Singleton<GameSystem>
 
     private void Start()
     {
-        LoadVibrationPreference();
-        LoadAudioPreference();
+        //LoadVibrationPreference();
+        //LoadAudioPreference();
     }
 
     public void LoadAudioPreference()
     {
         Volume = PlayerPrefs.GetFloat("ParamVolume");
-        AudioController.Instance.ChangeVolumeAllAudios(GameSystem.Instance.Volume);
+        AudioController.Instance?.ChangeVolumeAllAudios(GameSystem.Instance.Volume);
     }
 
     public void LoadVibrationPreference()
