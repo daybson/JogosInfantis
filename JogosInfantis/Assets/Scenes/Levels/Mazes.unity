@@ -15920,10 +15920,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1246580369}
-  streetTile: {fileID: 11400000, guid: 205f77ff9f6ad9940b93780687aa07d1, type: 2}
-  wallTile: {fileID: 11400000, guid: 161cf0fdbf5649a42925c879d1fd59dd, type: 2}
+  streetTile: {fileID: 0}
+  wallTile: {fileID: 11400000, guid: 205f77ff9f6ad9940b93780687aa07d1, type: 2}
   wall: 35
-  street: 0
+  street: 45
   width: 15
   height: 15
 --- !u!4 &1088620287
