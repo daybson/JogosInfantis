@@ -1,55 +1,39 @@
-﻿using System;
+﻿using MyMaze;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class ProceduralTileMaze : MonoBehaviour
 {
-    RecursizeBackTracker backTracker;
+    MazeGenerator backTracker;
     public Tilemap tilemap;
-    public TileBase tile1;
+    public TileBase street;
     public TileBase wall;
+    TilemapCollider2D tilemapCollider;
 
     public char wallCharacter;
     public char emptyCharacter;
-    public string mazeName;
+    public int width;
+    public int height;
 
-    private void Start()
+
+    private void Awake()
     {
-        ReadFromFile(mazeName);
+        tilemapCollider = tilemap.GetComponent<TilemapCollider2D>();
+        
+        Generate();
     }
 
-    void GenBacktrack()
-    {
 
-        this.backTracker = new RecursizeBackTracker(10, 10);
-        this.backTracker.Generate();
-        this.backTracker.Print(this.backTracker.Cells);
-
-        {
-            var rows = backTracker.Cells.GetLength(RecursizeBackTracker._rowDimension);
-            var columns = backTracker.Cells.GetLength(RecursizeBackTracker._columnDimension);
-
-            for (int y = 0; y < rows; y++)
-            {
-                for (int x = 0; x < columns; x++)
-                {
-                    var directions = (Directions)backTracker.Cells[y, x];
-
-                    var empty = directions.HasFlag(Directions.S) ? true : false;
-
-                    if (empty)
-                        tilemap.SetTile(new Vector3Int(y + 2, x + 2, 0), wall);
-
-                    empty = directions.HasFlag(Directions.E) ? true : false;
-
-                    if (empty)
-                        tilemap.SetTile(new Vector3Int(y + 2, x + 2, 0), wall);
-                }
-            }
-        }
+    public void Generate()
+    {        
+        backTracker = new MazeGenerator(width, height);
+        backTracker.Generate();
+        GenerateFromString(backTracker.ToString());
     }
 
 
@@ -60,14 +44,34 @@ public class ProceduralTileMaze : MonoBehaviour
         //https://rosettacode.org/wiki/Maze_generation#C.23
         var lines = File.ReadAllLines("Assets/Resources/MazesFiles/" + mazeName + ".txt");
 
+        for (int y = 0; y < lines.Length; y++)
+        {
+            for (int x = 0; x < lines[y].Length; x++)
+            {
+                if (lines[y][x] != emptyCharacter)
+                    tilemap.SetTile(new Vector3Int(x, y, 0), wall);
+            }
+        }
+    }
+
+
+    public void GenerateFromString(StringBuilder map)
+    {
+        tilemap.ClearAllTiles();
+
+        var lines = map.ToString().Split('\n');
+
         for (int x = 0; x < lines.Length; x++)
         {
             for (int y = 0; y < lines[x].Length; y++)
             {
-                if (lines[x][y] != emptyCharacter)
+                if (lines[x][y] == wallCharacter)
                     tilemap.SetTile(new Vector3Int(x, y, 0), wall);
             }
         }
 
+        //Destroy(tilemap.gameObject.GetComponent<TilemapCollider2D>());
+        //tilemapCollider = tilemap.gameObject.AddComponent<TilemapCollider2D>();
+        //tilemapCollider.usedByComposite = true;
     }
 }
