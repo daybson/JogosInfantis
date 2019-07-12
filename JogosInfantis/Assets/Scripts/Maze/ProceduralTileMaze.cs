@@ -11,12 +11,12 @@ public class ProceduralTileMaze : MonoBehaviour
 {
     MazeGenerator backTracker;
     public Tilemap tilemap;
-    public TileBase street;
-    public TileBase wall;
+    public TileBase streetTile;
+    public TileBase wallTile;
     TilemapCollider2D tilemapCollider;
 
-    public char wallCharacter;
-    public char emptyCharacter;
+    public char wall;
+    public char street;
     public int width;
     public int height;
 
@@ -24,14 +24,14 @@ public class ProceduralTileMaze : MonoBehaviour
     private void Awake()
     {
         tilemapCollider = tilemap.GetComponent<TilemapCollider2D>();
-        
+
         Generate();
     }
 
 
     public void Generate()
-    {        
-        backTracker = new MazeGenerator(width, height);
+    {
+        backTracker = new MazeGenerator(width, height, wall, street);
         backTracker.Generate();
         GenerateFromString(backTracker.ToString());
     }
@@ -48,8 +48,10 @@ public class ProceduralTileMaze : MonoBehaviour
         {
             for (int x = 0; x < lines[y].Length; x++)
             {
-                if (lines[y][x] != emptyCharacter)
-                    tilemap.SetTile(new Vector3Int(x, y, 0), wall);
+                if (lines[y][x] != street)
+                    tilemap.SetTile(new Vector3Int(x, y, 0), wallTile);
+                else
+                    tilemap.SetTile(new Vector3Int(x, y, 0), streetTile);
             }
         }
     }
@@ -65,8 +67,10 @@ public class ProceduralTileMaze : MonoBehaviour
         {
             for (int y = 0; y < lines[x].Length; y++)
             {
-                if (lines[x][y] == wallCharacter)
-                    tilemap.SetTile(new Vector3Int(x, y, 0), wall);
+                if (lines[x][y] == wall)
+                    tilemap.SetTile(new Vector3Int(x, y, 0), wallTile);
+                else
+                    tilemap.SetTile(new Vector3Int(x, y, 0), streetTile);
             }
         }
 

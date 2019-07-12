@@ -10,31 +10,30 @@ namespace MyMaze
     {
         int width;
         int height;
+        char wall;
+        char street;
+        public int[][] Cells { get; private set; }
 
-        public int[][] maze;
 
-        /// <summary>
-        /// Funciona melhor com valores ímpares
-        /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public MazeGenerator(int width, int height)
+        public MazeGenerator(int width, int height, char wall, char street)
         {
             this.width = width;
             this.height = height;
+            this.wall = wall;
+            this.street = street;
         }
 
 
         public void Generate()
         {
-            maze = new int[height][];
+            Cells = new int[height][];
 
             //inicializa 
             for (int i = 0; i < height; i++)
             {
-                maze[i] = new int[width];
+                Cells[i] = new int[width];
                 for (int j = 0; j < width; j++)
-                    maze[i][j] = 1;
+                    Cells[i][j] = 1;
             }
 
             Random rand = new Random();
@@ -52,15 +51,15 @@ namespace MyMaze
                 c = rand.Next(width);
             }
 
-            maze[r][c] = 0;
+            Cells[r][c] = 0;
 
-            recursion(r, c);
+            RecursiveDigging(r, c);
         }
 
 
-        public void recursion(int r, int c)
+        public void RecursiveDigging(int r, int c)
         {
-            var randDirs = generateRandomDirections();
+            var randDirs = GetRandomDirections();
 
             for (int i = 0; i < randDirs.Length; i++)
             {
@@ -70,44 +69,44 @@ namespace MyMaze
                         if (r - 2 <= 0)
                             continue;
 
-                        if (maze[r - 2][c] != 0)
+                        if (Cells[r - 2][c] != 0)
                         {
-                            maze[r - 2][c] = 0;
-                            maze[r - 1][c] = 0;
-                            recursion(r - 2, c);
+                            Cells[r - 2][c] = 0;
+                            Cells[r - 1][c] = 0;
+                            RecursiveDigging(r - 2, c);
                         }
                         break;
 
                     case 2: //right
                         if (c + 2 >= width - 1)
                             continue;
-                        if (maze[r][c + 2] != 0)
+                        if (Cells[r][c + 2] != 0)
                         {
-                            maze[r][c + 2] = 0;
-                            maze[r][c + 1] = 0;
-                            recursion(r, c + 2);
+                            Cells[r][c + 2] = 0;
+                            Cells[r][c + 1] = 0;
+                            RecursiveDigging(r, c + 2);
                         }
                         break;
 
                     case 3: //down
                         if (r + 2 >= height - 1)
                             continue;
-                        if (maze[r + 2][c] != 0)
+                        if (Cells[r + 2][c] != 0)
                         {
-                            maze[r + 2][c] = 0;
-                            maze[r + 1][c] = 0;
-                            recursion(r + 2, c);
+                            Cells[r + 2][c] = 0;
+                            Cells[r + 1][c] = 0;
+                            RecursiveDigging(r + 2, c);
                         }
                         break;
 
                     case 4: //left
                         if (c - 2 <= 0)
                             continue;
-                        if (maze[r][c - 2] != 0)
+                        if (Cells[r][c - 2] != 0)
                         {
-                            maze[r][c - 2] = 0;
-                            maze[r][c - 1] = 0;
-                            recursion(r, c - 2);
+                            Cells[r][c - 2] = 0;
+                            Cells[r][c - 1] = 0;
+                            RecursiveDigging(r, c - 2);
                         }
                         break;
                 }
@@ -115,27 +114,24 @@ namespace MyMaze
         }
 
 
-        private int[] generateRandomDirections()
+        private int[] GetRandomDirections()
         {
             var randoms = new List<int>() { 1, 2, 3, 4 };
-
-            randoms = randoms.OrderBy(x => UnityEngine.Random.Range(0, 4)).ToList();
-
-            return randoms.ToArray();
+            return randoms.OrderBy(x => UnityEngine.Random.Range(0, 4)).ToArray();
         }
 
 
-        public StringBuilder ToString()
+        public new StringBuilder ToString()
         {
             var s = new StringBuilder();
 
             for (int r = 0; r < height; r++)
             {
-                var line = "";
+                var line = string.Empty;
 
                 for (int c = 0; c < width; c++)
                 {
-                    line += maze[r][c] == 1 ? "#" : ".";
+                    line += Cells[r][c] == 1 ? wall : street;
                 }
 
                 s.AppendLine(line);
