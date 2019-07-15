@@ -24,8 +24,7 @@ public class ProceduralTileMaze : MonoBehaviour
     private void Awake()
     {
         tilemapCollider = tilemap.GetComponent<TilemapCollider2D>();
-
-        Generate();
+        //Generate();
     }
 
 
@@ -34,6 +33,36 @@ public class ProceduralTileMaze : MonoBehaviour
         backTracker = new MazeGenerator(width, height, wall, street);
         backTracker.Generate();
         GenerateFromString(backTracker.ToString());
+        SortBorderPoint();
+    }
+
+    public void Generate(int level)
+    {
+        switch (level)
+        {
+            case 0:
+                width = 7;
+                height = 5;
+                break;
+            case 1:
+                width = 9;
+                height = 7;
+                break;
+            case 2:
+                width = 11;
+                height = 7;
+                break;
+            case 3:
+                width = 13;
+                height = 9;
+                break;
+            case 4:
+                width = 21;
+                height = 17;
+                break;
+        }
+
+        Generate();
     }
 
 
@@ -42,7 +71,9 @@ public class ProceduralTileMaze : MonoBehaviour
         //https://www.dcode.fr/maze-generator
         //https://thenerdshow.com/amaze.html?rows=7&cols=6&color=FFFFFF&bgcolor=4C4587&sz=10px&blank=++&wall=%3Cem%3EHI%3C%2Fem%3E
         //https://rosettacode.org/wiki/Maze_generation#C.23
+
         var lines = File.ReadAllLines("Assets/Resources/MazesFiles/" + mazeName + ".txt");
+        StringBuilder stringBuilder = new StringBuilder(lines.ToString());
 
         for (int y = 0; y < lines.Length; y++)
         {
@@ -57,11 +88,11 @@ public class ProceduralTileMaze : MonoBehaviour
     }
 
 
-    public void GenerateFromString(StringBuilder map)
+    public void GenerateFromString(string map)
     {
         tilemap.ClearAllTiles();
 
-        var lines = map.ToString().Split('\n');
+        var lines = map.Split('\n');
 
         for (int x = 0; x < lines.Length; x++)
         {
@@ -77,5 +108,21 @@ public class ProceduralTileMaze : MonoBehaviour
         //Destroy(tilemap.gameObject.GetComponent<TilemapCollider2D>());
         //tilemapCollider = tilemap.gameObject.AddComponent<TilemapCollider2D>();
         //tilemapCollider.usedByComposite = true;
+    }
+
+
+    public void SortBorderPoint()
+    {
+        //var lines = backTracker.ToString().Split('\n');
+
+        var heightFirstColumn = UnityEngine.Random.Range(2, height - 2);
+        var heightLastColumn = UnityEngine.Random.Range(2, height - 2);
+
+
+        tilemap.SetTile(new Vector3Int(0, heightFirstColumn, 0), streetTile);
+        tilemap.SetTile(new Vector3Int(1, heightFirstColumn, 0), streetTile);
+
+        tilemap.SetTile(new Vector3Int(width - 1, heightLastColumn, 0), streetTile);
+        tilemap.SetTile(new Vector3Int(width - 2, heightLastColumn, 0), streetTile);
     }
 }

@@ -47,7 +47,7 @@ public class UIIncrementalLevels : MonoBehaviour
 
     private void UpdateIndicator(int i, Sprite image)
     {
-        if (indicators.Count > 0)
+        if (indicators?.Count > 0)
             indicators[i].sprite = image;
     }
 }

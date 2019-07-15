@@ -8,17 +8,17 @@ namespace MyMaze
     //http://www.migapro.com/depth-first-search/
     public class MazeGenerator
     {
-        int width;
         int height;
+        int width;
         char wall;
         char street;
         public int[][] Cells { get; private set; }
+        string asciiMaze;
 
-
-        public MazeGenerator(int width, int height, char wall, char street)
+        public MazeGenerator(int height, int width, char wall, char street)
         {
-            this.width = width;
-            this.height = height;
+            this.height = width;
+            this.width = height;
             this.wall = wall;
             this.street = street;
         }
@@ -26,29 +26,30 @@ namespace MyMaze
 
         public void Generate()
         {
-            Cells = new int[height][];
+            asciiMaze = string.Empty;
+            Cells = new int[width][];
 
             //inicializa 
-            for (int i = 0; i < height; i++)
+            for (int i = 0; i < width; i++)
             {
-                Cells[i] = new int[width];
-                for (int j = 0; j < width; j++)
+                Cells[i] = new int[height];
+                for (int j = 0; j < height; j++)
                     Cells[i][j] = 1;
             }
 
             Random rand = new Random();
 
             //celula inicial aleatoria
-            int r = rand.Next(height);
+            int r = rand.Next(width);
             while (r % 2 == 0)
             {
-                r = rand.Next(height);
+                r = rand.Next(width);
             }
 
-            int c = rand.Next(width);
+            int c = rand.Next(height);
             while (c % 2 == 0)
             {
-                c = rand.Next(width);
+                c = rand.Next(height);
             }
 
             Cells[r][c] = 0;
@@ -78,7 +79,7 @@ namespace MyMaze
                         break;
 
                     case 2: //right
-                        if (c + 2 >= width - 1)
+                        if (c + 2 >= height - 1)
                             continue;
                         if (Cells[r][c + 2] != 0)
                         {
@@ -89,7 +90,7 @@ namespace MyMaze
                         break;
 
                     case 3: //down
-                        if (r + 2 >= height - 1)
+                        if (r + 2 >= width - 1)
                             continue;
                         if (Cells[r + 2][c] != 0)
                         {
@@ -121,23 +122,28 @@ namespace MyMaze
         }
 
 
-        public new StringBuilder ToString()
+        public new string ToString()
         {
-            var s = new StringBuilder();
-
-            for (int r = 0; r < height; r++)
+            if (string.IsNullOrEmpty(asciiMaze))
             {
-                var line = string.Empty;
+                var s = new StringBuilder();
 
-                for (int c = 0; c < width; c++)
+                for (int r = 0; r < width; r++)
                 {
-                    line += Cells[r][c] == 1 ? wall : street;
+                    var line = string.Empty;
+
+                    for (int c = 0; c < height; c++)
+                    {
+                        line += Cells[r][c] == 1 ? wall : street;
+                    }
+
+                    s.AppendLine(line);
                 }
 
-                s.AppendLine(line);
+                asciiMaze = s.ToString();
             }
 
-            return s;
+            return asciiMaze;
         }
     }
 }

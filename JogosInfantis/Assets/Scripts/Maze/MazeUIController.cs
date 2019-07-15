@@ -8,6 +8,8 @@ public class MazeUIController : Singleton<MazeUIController>
     public UIPanelLevelComplete UIPanelLevelComplete;
     public UIIngameButtons UIIngameButtons;
     public UIPanelYesNo UIPanelYesNo;
+    public UIIncrementalLevels UIIncrementalLevels;
+    public ProceduralTileMaze ProceduralTileMaze;
 
     private void Awake()
     {
@@ -20,6 +22,8 @@ public class MazeUIController : Singleton<MazeUIController>
         UIPanelLevelComplete.buttonReplay.onClick.AddListener(() => MazeController.Instance.LoadCurrentMaze());
         UIPanelLevelComplete.buttonBack.onClick.AddListener(() => SceneManager.LoadScene(SceneLoader.IndexMazeLevels));
 
+        UIIncrementalLevels.OnIncrease += (level) => ProceduralTileMaze.Generate(UIIncrementalLevels.level);
+        UIIncrementalLevels.OnDecrease += (level) => ProceduralTileMaze.Generate(UIIncrementalLevels.level);
 
         //UIIngameButtons.ButtonPausePlay.onClick.AddListener(() => MazeController.Instance.PlayPause());
         UIIngameButtons.ButtonConfigs.onClick.AddListener(() => MazeController.Instance.ShowConfigPanel());
