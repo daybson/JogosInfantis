@@ -656,7 +656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &661608550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,6 +781,12 @@ MonoBehaviour:
   street: 45
   width: 15
   height: 15
+  levels:
+  - {x: 9, y: 7}
+  - {x: 11, y: 9}
+  - {x: 13, y: 11}
+  - {x: 15, y: 13}
+  - {x: 17, y: 15}
 --- !u!4 &1088620287
 Transform:
   m_ObjectHideFlags: 0
@@ -2558,10 +2564,10 @@ MonoBehaviour:
   ButtonDec: {fileID: 8331341231228228927}
   ButtonInc: {fileID: 3877547974862408972}
   indicators: []
-  maxLevel: 5
+  maxLevel: 4
   selected: {fileID: 21300000, guid: ad34cd5d3e538b44eab351852ce8b347, type: 3}
   deselected: {fileID: 21300000, guid: 0609117dc48899248b06ecdccb55b5b1, type: 3}
-  level: 0
+  level: -1
 --- !u!1001 &5036548317407967289
 PrefabInstance:
   m_ObjectHideFlags: 0

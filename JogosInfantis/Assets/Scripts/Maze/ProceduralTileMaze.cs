@@ -20,11 +20,12 @@ public class ProceduralTileMaze : MonoBehaviour
     public int width;
     public int height;
 
+    public Vector2Int[] levels;
+
 
     private void Awake()
     {
         tilemapCollider = tilemap.GetComponent<TilemapCollider2D>();
-        //Generate();
     }
 
 
@@ -34,61 +35,23 @@ public class ProceduralTileMaze : MonoBehaviour
         backTracker.Generate();
         GenerateFromString(backTracker.ToString());
         SortBorderPoint();
+        RecenterGridOnScreen();
     }
+
 
     public void Generate(int level)
     {
-        switch (level)
+        if (level <= levels.Length - 1)
         {
-            case 0:
-                width = 7;
-                height = 5;
-                break;
-            case 1:
-                width = 9;
-                height = 7;
-                break;
-            case 2:
-                width = 11;
-                height = 7;
-                break;
-            case 3:
-                width = 13;
-                height = 9;
-                break;
-            case 4:
-                width = 21;
-                height = 17;
-                break;
+            width = levels[level].x;
+            height = levels[level].y;
         }
 
         Generate();
     }
 
 
-    void ReadFromFile(string mazeName)
-    {
-        //https://www.dcode.fr/maze-generator
-        //https://thenerdshow.com/amaze.html?rows=7&cols=6&color=FFFFFF&bgcolor=4C4587&sz=10px&blank=++&wall=%3Cem%3EHI%3C%2Fem%3E
-        //https://rosettacode.org/wiki/Maze_generation#C.23
-
-        var lines = File.ReadAllLines("Assets/Resources/MazesFiles/" + mazeName + ".txt");
-        StringBuilder stringBuilder = new StringBuilder(lines.ToString());
-
-        for (int y = 0; y < lines.Length; y++)
-        {
-            for (int x = 0; x < lines[y].Length; x++)
-            {
-                if (lines[y][x] != street)
-                    tilemap.SetTile(new Vector3Int(x, y, 0), wallTile);
-                else
-                    tilemap.SetTile(new Vector3Int(x, y, 0), streetTile);
-            }
-        }
-    }
-
-
-    public void GenerateFromString(string map)
+    private void GenerateFromString(string map)
     {
         tilemap.ClearAllTiles();
 
@@ -111,10 +74,30 @@ public class ProceduralTileMaze : MonoBehaviour
     }
 
 
-    public void SortBorderPoint()
+    private void ReadFromFile(string mazeName)
     {
-        //var lines = backTracker.ToString().Split('\n');
+        //https://www.dcode.fr/maze-generator
+        //https://thenerdshow.com/amaze.html?rows=7&cols=6&color=FFFFFF&bgcolor=4C4587&sz=10px&blank=++&wall=%3Cem%3EHI%3C%2Fem%3E
+        //https://rosettacode.org/wiki/Maze_generation#C.23
 
+        var lines = File.ReadAllLines("Assets/Resources/MazesFiles/" + mazeName + ".txt");
+        StringBuilder stringBuilder = new StringBuilder(lines.ToString());
+
+        for (int y = 0; y < lines.Length; y++)
+        {
+            for (int x = 0; x < lines[y].Length; x++)
+            {
+                if (lines[y][x] != street)
+                    tilemap.SetTile(new Vector3Int(x, y, 0), wallTile);
+                else
+                    tilemap.SetTile(new Vector3Int(x, y, 0), streetTile);
+            }
+        }
+    }
+
+
+    private void SortBorderPoint()
+    {
         var heightFirstColumn = UnityEngine.Random.Range(2, height - 2);
         var heightLastColumn = UnityEngine.Random.Range(2, height - 2);
 
@@ -124,5 +107,21 @@ public class ProceduralTileMaze : MonoBehaviour
 
         tilemap.SetTile(new Vector3Int(width - 1, heightLastColumn, 0), streetTile);
         tilemap.SetTile(new Vector3Int(width - 2, heightLastColumn, 0), streetTile);
+
+
+
+    }
+
+
+    private void RecenterGridOnScreen()
+    {
+        var center = new Vector3Int(width / 2 + 1, height / 2 + 1, 0);
+        tilemap.GetTile(center);
+
+        var mazeCellCenter = tilemap.GetCellCenterWorld(center);
+        var worldCenter = GameSystem.Instance.MainCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+        var centerOffset = worldCenter - mazeCellCenter;
+        tilemap.transform.parent.transform.position += centerOffset;
     }
 }
