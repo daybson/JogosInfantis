@@ -777,6 +777,7 @@ MonoBehaviour:
   tilemap: {fileID: 1246580369}
   streetTile: {fileID: 0}
   wallTile: {fileID: 11400000, guid: 205f77ff9f6ad9940b93780687aa07d1, type: 2}
+  pathTile: {fileID: 11400000, guid: 0d77d05b18139604e861ca487f8c0720, type: 2}
   wall: 35
   street: 45
   width: 15
@@ -787,6 +788,7 @@ MonoBehaviour:
   - {x: 13, y: 11}
   - {x: 15, y: 13}
   - {x: 17, y: 15}
+  path: 46
 --- !u!4 &1088620287
 Transform:
   m_ObjectHideFlags: 0

@@ -13,15 +13,16 @@ public class ProceduralTileMaze : MonoBehaviour
     public Tilemap tilemap;
     public TileBase streetTile;
     public TileBase wallTile;
+    public TileBase pathTile;
     TilemapCollider2D tilemapCollider;
 
     public char wall;
     public char street;
+    public char path;
     public int width;
     public int height;
 
     public Vector2Int[] levels;
-
 
     private void Awake()
     {
@@ -31,11 +32,12 @@ public class ProceduralTileMaze : MonoBehaviour
 
     public void Generate()
     {
-        backTracker = new MazeGenerator(width, height, wall, street);
+        backTracker = new MazeGenerator(width, height, wall, street, path);
         backTracker.Generate();
         GenerateFromString(backTracker.ToString());
         SortBorderPoint();
         RecenterGridOnScreen();
+        //backTracker.RatSolver(backTracker.entry, MazeGenerator.Directions.Down);
     }
 
 
@@ -63,8 +65,10 @@ public class ProceduralTileMaze : MonoBehaviour
             {
                 if (lines[x][y] == wall)
                     tilemap.SetTile(new Vector3Int(x, y, 0), wallTile);
-                else
+                else if (lines[x][y] == street)
                     tilemap.SetTile(new Vector3Int(x, y, 0), streetTile);
+                else if (lines[x][y] == path)
+                    tilemap.SetTile(new Vector3Int(x, y, 0), pathTile);
             }
         }
 
@@ -108,7 +112,8 @@ public class ProceduralTileMaze : MonoBehaviour
         tilemap.SetTile(new Vector3Int(width - 1, heightLastColumn, 0), streetTile);
         tilemap.SetTile(new Vector3Int(width - 2, heightLastColumn, 0), streetTile);
 
-
+        backTracker.entry = new Vector2Int(0, heightFirstColumn);
+        backTracker.exit = new Vector2Int(width - 1, heightLastColumn);
 
     }
 
