@@ -37,7 +37,8 @@ public class ProceduralTileMaze : MonoBehaviour
         GenerateFromString(backTracker.ToString());
         SortBorderPoint();
         RecenterGridOnScreen();
-        //backTracker.RatSolver(backTracker.entry, MazeGenerator.Directions.Down);
+
+        backTracker.RatSolver(backTracker.entry, MazeGenerator.Directions.Down);
     }
 
 

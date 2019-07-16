@@ -780,6 +780,7 @@ MonoBehaviour:
   pathTile: {fileID: 11400000, guid: 0d77d05b18139604e861ca487f8c0720, type: 2}
   wall: 35
   street: 45
+  path: 46
   width: 15
   height: 15
   levels:
@@ -788,7 +789,6 @@ MonoBehaviour:
   - {x: 13, y: 11}
   - {x: 15, y: 13}
   - {x: 17, y: 15}
-  path: 46
 --- !u!4 &1088620287
 Transform:
   m_ObjectHideFlags: 0
@@ -2390,7 +2390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 101, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &3877547974862408971
@@ -2463,7 +2463,7 @@ PrefabInstance:
     - target: {fileID: 8203381941463351051, guid: 5fb0b4f0e83085a43919c936b765b344,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 202
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8203381941463351051, guid: 5fb0b4f0e83085a43919c936b765b344,
         type: 3}
@@ -2875,7 +2875,7 @@ PrefabInstance:
     - target: {fileID: 8063683340932366374, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8063683340932366374, guid: 65ecd94db685c5248909ade91882e631,
         type: 3}
@@ -3212,7 +3212,7 @@ PrefabInstance:
     - target: {fileID: 8203381941463351051, guid: 5fb0b4f0e83085a43919c936b765b344,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 96
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8203381941463351051, guid: 5fb0b4f0e83085a43919c936b765b344,
         type: 3}
