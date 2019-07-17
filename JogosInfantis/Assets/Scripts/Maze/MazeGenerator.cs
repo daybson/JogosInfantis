@@ -17,8 +17,8 @@ namespace MyMaze
             Right
         }
 
-        int height;
-        int width;
+        int columns;
+        int lines;
 
         char wall;
         char street;
@@ -29,14 +29,14 @@ namespace MyMaze
         public Vector2Int entry;
         public Vector2Int exit;
 
-        int WALL = 1;
-        int STREET = 0;
-        int PATH = 2;
+        public readonly int WALL = 1;
+        public readonly int STREET = 0;
+        public readonly int PATH = 2;
 
         public MazeGenerator(int height, int width, char wall, char street, char path)
         {
-            this.height = width;
-            this.width = height;
+            this.columns = height;
+            this.lines = width;
             this.wall = wall;
             this.street = street;
             this.path = path;
@@ -46,38 +46,40 @@ namespace MyMaze
         public void Generate()
         {
             asciiMaze = string.Empty;
-            Cells = new int[width][];
+
+            Cells = new int[lines][];
 
             //inicializa 
-            for (int i = 0; i < width; i++)
+            for (int line = 0; line < lines; line++)
             {
-                Cells[i] = new int[height];
-                for (int j = 0; j < height; j++)
-                    Cells[i][j] = WALL;
+                Cells[line] = new int[columns];
+
+                for (int col = 0; col < columns; col++)
+                    Cells[line][col] = WALL;
             }
 
             System.Random rand = new System.Random();
 
             //celula inicial aleatoria
-            int r = rand.Next(width);
-            while (r % 2 == 0)
+            int l = rand.Next(lines);
+            while (l % 2 == 0)
             {
-                r = rand.Next(width);
+                l = rand.Next(lines);
             }
 
-            int c = rand.Next(height);
+            int c = rand.Next(columns);
             while (c % 2 == 0)
             {
-                c = rand.Next(height);
+                c = rand.Next(columns);
             }
 
-            Cells[r][c] = STREET;
+            Cells[l][c] = STREET;
 
-            RecursiveDigging(r, c);
+            RecursiveDigging(l, c);
         }
 
 
-        private void RecursiveDigging(int r, int c)
+        private void RecursiveDigging(int line, int col)
         {
             var randDirs = GetRandomDirections();
 
@@ -86,47 +88,50 @@ namespace MyMaze
                 switch (randDirs[i])
                 {
                     case 1: //up
-                        if (r - 2 <= 0)
+                        if (line - 2 <= 0)
                             continue;
 
-                        if (Cells[r - 2][c] != STREET)
+                        if (Cells[line - 2][col] != STREET)
                         {
-                            Cells[r - 2][c] = STREET;
-                            Cells[r - 1][c] = STREET;
-                            RecursiveDigging(r - 2, c);
+                            Cells[line - 2][col] = STREET;
+                            Cells[line - 1][col] = STREET;
+                            RecursiveDigging(line - 2, col);
                         }
                         break;
 
                     case 2: //right
-                        if (c + 2 >= height - 1)
+                        if (col + 2 >= columns - 1)
                             continue;
-                        if (Cells[r][c + 2] != STREET)
+
+                        if (Cells[line][col + 2] != STREET)
                         {
-                            Cells[r][c + 2] = STREET;
-                            Cells[r][c + 1] = STREET;
-                            RecursiveDigging(r, c + 2);
+                            Cells[line][col + 2] = STREET;
+                            Cells[line][col + 1] = STREET;
+                            RecursiveDigging(line, col + 2);
                         }
                         break;
 
                     case 3: //down
-                        if (r + 2 >= width - 1)
+                        if (line + 2 >= lines - 1)
                             continue;
-                        if (Cells[r + 2][c] != STREET)
+
+                        if (Cells[line + 2][col] != STREET)
                         {
-                            Cells[r + 2][c] = STREET;
-                            Cells[r + 1][c] = STREET;
-                            RecursiveDigging(r + 2, c);
+                            Cells[line + 2][col] = STREET;
+                            Cells[line + 1][col] = STREET;
+                            RecursiveDigging(line + 2, col);
                         }
                         break;
 
                     case 4: //left
-                        if (c - 2 <= 0)
+                        if (col - 2 <= 0)
                             continue;
-                        if (Cells[r][c - 2] != STREET)
+
+                        if (Cells[line][col - 2] != STREET)
                         {
-                            Cells[r][c - 2] = 0;
-                            Cells[r][c - 1] = 0;
-                            RecursiveDigging(r, c - 2);
+                            Cells[line][col - 2] = STREET;
+                            Cells[line][col - 1] = STREET;
+                            RecursiveDigging(line, col - 2);
                         }
                         break;
                 }
@@ -139,6 +144,7 @@ namespace MyMaze
             var randoms = new List<int>() { 1, 2, 3, 4 };
             return randoms.OrderBy(x => UnityEngine.Random.Range(0, 4)).ToArray();
         }
+
 
         public bool RatSolver(Vector2Int position, Directions direction)
         {
@@ -183,17 +189,23 @@ namespace MyMaze
             return false;
         }
 
+
         private bool IsSafeToGo(Vector2Int position)
         {
             if (position.x >= 0 &&
-                position.y >= 0 &&
-                position.x < width &&
-                position.y < height &&
-                Cells[position.x][position.y] != WALL)
+                    position.y >= 0 &&
+                    position.x < columns &&
+                    position.y < lines &&
+                    Cells[position.x][position.y] != WALL)
+            {
                 return true;
-
-            return false;
+            }
+            else
+            {
+                return false;
+            }
         }
+
 
         public new string ToString()
         {
@@ -201,13 +213,13 @@ namespace MyMaze
             {
                 var s = new StringBuilder();
 
-                for (int r = 0; r < width; r++)
+                for (int l = 0; l < lines; l++)
                 {
                     var line = string.Empty;
 
-                    for (int c = 0; c < height; c++)
+                    for (int c = 0; c < columns; c++)
                     {
-                        switch (Cells[r][c])
+                        switch (Cells[l][c])
                         {
                             case 0:
                                 line += street;

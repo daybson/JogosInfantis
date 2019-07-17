@@ -34,17 +34,19 @@ public class ProceduralTileMaze : MonoBehaviour
     {
         backTracker = new MazeGenerator(width, height, wall, street, path);
         backTracker.Generate();
+
         GenerateFromString(backTracker.ToString());
         SortBorderPoint();
         RecenterGridOnScreen();
 
         backTracker.RatSolver(backTracker.entry, MazeGenerator.Directions.Down);
+        GenerateFromString(backTracker.ToString());
     }
 
 
     public void Generate(int level)
     {
-        if (level <= levels.Length - 1)
+        if (level <= levels.Length - 1 && level >= 0)
         {
             width = levels[level].x;
             height = levels[level].y;
@@ -60,16 +62,16 @@ public class ProceduralTileMaze : MonoBehaviour
 
         var lines = map.Split('\n');
 
-        for (int x = 0; x < lines.Length; x++)
+        for (int l = 0; l < lines.Length; l++)
         {
-            for (int y = 0; y < lines[x].Length; y++)
+            for (int c = 0; c < lines[l].Length; c++)
             {
-                if (lines[x][y] == wall)
-                    tilemap.SetTile(new Vector3Int(x, y, 0), wallTile);
-                else if (lines[x][y] == street)
-                    tilemap.SetTile(new Vector3Int(x, y, 0), streetTile);
-                else if (lines[x][y] == path)
-                    tilemap.SetTile(new Vector3Int(x, y, 0), pathTile);
+                if (lines[l][c] == wall)
+                    tilemap.SetTile(new Vector3Int(c, l, 0), wallTile);
+                else if (lines[l][c] == street)
+                    tilemap.SetTile(new Vector3Int(c, l, 0), streetTile);
+                else if (lines[l][c] == path)
+                    tilemap.SetTile(new Vector3Int(c, l, 0), pathTile);
             }
         }
 
@@ -101,22 +103,32 @@ public class ProceduralTileMaze : MonoBehaviour
     }
 
 
+
     private void SortBorderPoint()
     {
         var heightFirstColumn = UnityEngine.Random.Range(2, height - 2);
         var heightLastColumn = UnityEngine.Random.Range(2, height - 2);
 
-
-        tilemap.SetTile(new Vector3Int(0, heightFirstColumn, 0), streetTile);
-        tilemap.SetTile(new Vector3Int(1, heightFirstColumn, 0), streetTile);
-
-        tilemap.SetTile(new Vector3Int(width - 1, heightLastColumn, 0), streetTile);
-        tilemap.SetTile(new Vector3Int(width - 2, heightLastColumn, 0), streetTile);
-
         backTracker.entry = new Vector2Int(0, heightFirstColumn);
         backTracker.exit = new Vector2Int(width - 1, heightLastColumn);
 
+
+
+        tilemap.SetTile(new Vector3Int(backTracker.entry.x, backTracker.entry.y, 0), streetTile);
+        tilemap.SetTile(new Vector3Int(backTracker.entry.x + 1, backTracker.entry.y, 0), streetTile);
+
+        backTracker.Cells[backTracker.entry.y][backTracker.entry.x] = backTracker.STREET;
+        backTracker.Cells[backTracker.entry.y + 1][backTracker.entry.x] = backTracker.STREET;
+
+
+
+        tilemap.SetTile(new Vector3Int(backTracker.exit.x, backTracker.exit.y, 0), streetTile);
+        tilemap.SetTile(new Vector3Int(backTracker.exit.x - 1, backTracker.exit.y, 0), streetTile);
+
+        backTracker.Cells[backTracker.exit.y][backTracker.exit.x] = backTracker.STREET;
+        backTracker.Cells[backTracker.exit.y - 1][backTracker.exit.x] = backTracker.STREET;
     }
+
 
 
     private void RecenterGridOnScreen()
